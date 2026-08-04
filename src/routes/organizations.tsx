@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Building2 } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/organizations")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/organizations")({
       eyebrow="Organizations"
       title="Teams and institutions"
       description="Companies, brands, agencies, and non-profits collaborating with creators."
-      icon={Building2}
     />
   ),
 });

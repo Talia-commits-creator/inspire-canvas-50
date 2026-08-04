@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Users } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/community")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/community")({
       eyebrow="Community"
       title="Where the ecosystem gathers"
       description="Groups, discussions, events, and shared spaces for creators and audiences."
-      icon={Users}
     />
   ),
 });

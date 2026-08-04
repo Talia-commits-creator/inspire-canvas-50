@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { UserPlus } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/register")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/register")({
       eyebrow="Account"
       title="Create your account"
       description="Registration will be enabled once Lovable Cloud is connected."
-      icon={UserPlus}
     />
   ),
 });

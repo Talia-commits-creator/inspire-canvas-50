@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Compass } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/discover")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/discover")({
       eyebrow="Discover"
       title="Discover the ecosystem"
       description="Search, browse, and explore creators, organizations, and projects across the platform."
-      icon={Compass}
     />
   ),
 });

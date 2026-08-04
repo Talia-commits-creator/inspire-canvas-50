@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Sparkles } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/creators")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/creators")({
       eyebrow="Creators"
       title="Talent, portfolios, and voices"
       description="A home for creators to publish work, offer services, and build their audience."
-      icon={Sparkles}
     />
   ),
 });
