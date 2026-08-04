@@ -1,92 +1,98 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Moon, Sparkles, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/providers/theme-provider";
-import { PRIMARY_NAV, SITE } from "@/constants/navigation";
-import { cn } from "@/lib/utils";
+import { PRIMARY_NAV, MOBILE_NAV, SITE } from "@/constants/navigation";
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
-          <span
-            className="grid h-8 w-8 place-items-center rounded-lg text-primary-foreground"
-            style={{ background: "var(--gradient-hero)" }}
-          >
-            <Sparkles className="h-4 w-4" />
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur">
+      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:h-18 lg:px-8">
+        <Link
+          to="/"
+          className="flex min-w-0 items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
+        >
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary font-display text-sm font-semibold text-primary-foreground">
+            {SITE.short}
           </span>
-          <span className="hidden sm:inline">{SITE.name}</span>
-          <span className="sm:hidden">{SITE.short}</span>
+          <span className="truncate">{SITE.name}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {PRIMARY_NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              activeOptions={{ exact: item.to === "/" }}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-              )}
-              activeProps={{ className: "text-foreground bg-secondary" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <nav className="hidden items-center lg:flex">
+            {PRIMARY_NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                activeOptions={{ exact: item.to === "/" }}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "text-foreground" }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="flex items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggle}
-            aria-label="Toggle theme"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === "dark" ? <Sun /> : <Moon />}
           </Button>
-          <Link to="/login" className="hidden sm:block">
-            <Button variant="ghost" size="sm">Login</Button>
-          </Link>
-          <Link to="/register" className="hidden sm:block">
-            <Button size="sm">Get started</Button>
-          </Link>
+
+          <div className="hidden items-center gap-2 sm:flex">
+            <Link to="/login">
+              <Button variant="ghost" size="sm">
+                Log in
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button size="sm">Join</Button>
+            </Link>
+          </div>
+
           <Button
             variant="ghost"
             size="icon"
             className="lg:hidden"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X /> : <Menu />}
           </Button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-border/60 lg:hidden">
+        <div className="border-t border-border bg-background lg:hidden">
           <nav className="mx-auto grid max-w-7xl gap-1 px-4 py-3 sm:px-6">
-            {PRIMARY_NAV.map((item) => (
+            {MOBILE_NAV.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
+                activeOptions={{ exact: item.to === "/" }}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                className="flex min-h-11 items-center rounded-md px-3 text-base font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "text-foreground bg-secondary" }}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="mt-2 flex gap-2 border-t border-border/60 pt-3">
-              <Link to="/login" onClick={() => setOpen(false)} className="flex-1">
-                <Button variant="outline" className="w-full" size="sm">Login</Button>
+            <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border pt-3">
+              <Link to="/login" onClick={() => setOpen(false)}>
+                <Button variant="outline" className="w-full">
+                  Log in
+                </Button>
               </Link>
-              <Link to="/register" onClick={() => setOpen(false)} className="flex-1">
-                <Button className="w-full" size="sm">Get started</Button>
+              <Link to="/register" onClick={() => setOpen(false)}>
+                <Button className="w-full">Join</Button>
               </Link>
             </div>
           </nav>

@@ -15,6 +15,15 @@ export const PRIMARY_NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+/* Mobile keeps only the highest-value destinations */
+export const MOBILE_NAV = [
+  { to: "/discover", label: "Discover" },
+  { to: "/creators", label: "Creators" },
+  { to: "/projects", label: "Projects" },
+  { to: "/community", label: "Community" },
+  { to: "/about", label: "About" },
+] as const;
+
 export const FOOTER_GROUPS = [
   {
     title: "Platform",
