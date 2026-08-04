@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Info } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/about")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/about")({
       eyebrow="About"
       title="Our mission"
       description="Inspire to Aspire exists to connect creators, clients, organizations, and communities through a fair, transparent, and inspiring platform."
-      icon={Info}
     />
   ),
 });

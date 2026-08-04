@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LayoutDashboard } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/dashboard")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/dashboard")({
       eyebrow="Workspace"
       title="Dashboard"
       description="Your personal workspace. Widgets and modules will land here as features ship."
-      icon={LayoutDashboard}
     />
   ),
 });

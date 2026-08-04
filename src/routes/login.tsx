@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LogIn } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/login")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/login")({
       eyebrow="Account"
       title="Sign in"
       description="Authentication will be enabled once Lovable Cloud is connected."
-      icon={LogIn}
     />
   ),
 });

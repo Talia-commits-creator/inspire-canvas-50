@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FolderKanban } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/projects")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/projects")({
       eyebrow="Projects"
       title="Work in motion"
       description="Featured collaborations, open briefs, and public projects."
-      icon={FolderKanban}
     />
   ),
 });

@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail } from "lucide-react";
 import { PlaceholderPage } from "@/components/common/placeholder-page";
 
 export const Route = createFileRoute("/contact")({
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/contact")({
       eyebrow="Contact"
       title="Get in touch"
       description="Questions, partnerships, or press — we'd love to hear from you."
-      icon={Mail}
     />
   ),
 });
