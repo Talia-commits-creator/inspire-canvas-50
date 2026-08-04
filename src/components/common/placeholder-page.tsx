@@ -1,4 +1,3 @@
-import type { LucideIcon } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { EmptyState } from "@/components/common/empty-state";
@@ -15,8 +14,6 @@ export function PlaceholderPage({
   description?: string;
   emptyTitle?: string;
   emptyDescription?: string;
-  /** Accepted for compatibility; decorative icons are no longer rendered. */
-  icon?: LucideIcon;
 }) {
   return (
     <SiteLayout>
