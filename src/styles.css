@@ -45,6 +45,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-overlay: var(--overlay);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
 }
 
 :root {
@@ -84,12 +87,19 @@
   --destructive: oklch(0.55 0.19 27);
   --destructive-foreground: oklch(0.99 0 0);
 
+  --success: oklch(0.55 0.09 155);
+  --success-foreground: oklch(0.99 0.005 85);
+
   --border: oklch(0.905 0.008 90);
   --input: oklch(0.88 0.008 90);
   --ring: oklch(0.44 0.075 197);
 
+  /* Overlay scrim for dialogs/sheets — tinted, never pure black */
+  --overlay: oklch(0.24 0.012 250 / 55%);
+
   --shadow-soft: 0 1px 2px color-mix(in oklab, var(--foreground) 5%, transparent);
   --shadow-raised: 0 6px 18px -10px color-mix(in oklab, var(--foreground) 22%, transparent);
+  --shadow-overlay: 0 18px 48px -24px color-mix(in oklab, var(--foreground) 40%, transparent);
   --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   --sidebar: oklch(0.975 0.008 90);
@@ -133,12 +143,18 @@
   --destructive: oklch(0.62 0.18 27);
   --destructive-foreground: oklch(0.98 0 0);
 
+  --success: oklch(0.72 0.10 155);
+  --success-foreground: oklch(0.18 0.02 155);
+
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 18%);
   --ring: oklch(0.72 0.085 190);
 
+  --overlay: oklch(0.12 0.01 235 / 70%);
+
   --shadow-soft: 0 1px 2px oklch(0 0 0 / 40%);
   --shadow-raised: 0 8px 24px -12px oklch(0 0 0 / 60%);
+  --shadow-overlay: 0 18px 48px -24px oklch(0 0 0 / 75%);
 
   --sidebar: oklch(0.22 0.014 235);
   --sidebar-foreground: oklch(0.95 0.006 85);
@@ -178,4 +194,15 @@
     color-mix(in oklab, var(--color-foreground) 4%, transparent) 0 2px,
     transparent 2px 12px
   );
+}
+
+/* Semantic elevation utilities — use these instead of Tailwind shadow-* */
+@utility elevation-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility elevation-raised {
+  box-shadow: var(--shadow-raised);
+}
+@utility elevation-overlay {
+  box-shadow: var(--shadow-overlay);
 }
