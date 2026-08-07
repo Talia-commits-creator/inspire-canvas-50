@@ -143,12 +143,18 @@
   --destructive: oklch(0.62 0.18 27);
   --destructive-foreground: oklch(0.98 0 0);
 
+  --success: oklch(0.72 0.10 155);
+  --success-foreground: oklch(0.18 0.02 155);
+
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 18%);
   --ring: oklch(0.72 0.085 190);
 
+  --overlay: oklch(0.12 0.01 235 / 70%);
+
   --shadow-soft: 0 1px 2px oklch(0 0 0 / 40%);
   --shadow-raised: 0 8px 24px -12px oklch(0 0 0 / 60%);
+  --shadow-overlay: 0 18px 48px -24px oklch(0 0 0 / 75%);
 
   --sidebar: oklch(0.22 0.014 235);
   --sidebar-foreground: oklch(0.95 0.006 85);
