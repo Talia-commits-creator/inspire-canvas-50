@@ -195,3 +195,14 @@
     transparent 2px 12px
   );
 }
+
+/* Semantic elevation utilities — use these instead of Tailwind shadow-* */
+@utility elevation-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility elevation-raised {
+  box-shadow: var(--shadow-raised);
+}
+@utility elevation-overlay {
+  box-shadow: var(--shadow-overlay);
+}
