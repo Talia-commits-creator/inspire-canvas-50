@@ -87,12 +87,19 @@
   --destructive: oklch(0.55 0.19 27);
   --destructive-foreground: oklch(0.99 0 0);
 
+  --success: oklch(0.55 0.09 155);
+  --success-foreground: oklch(0.99 0.005 85);
+
   --border: oklch(0.905 0.008 90);
   --input: oklch(0.88 0.008 90);
   --ring: oklch(0.44 0.075 197);
 
+  /* Overlay scrim for dialogs/sheets — tinted, never pure black */
+  --overlay: oklch(0.24 0.012 250 / 55%);
+
   --shadow-soft: 0 1px 2px color-mix(in oklab, var(--foreground) 5%, transparent);
   --shadow-raised: 0 6px 18px -10px color-mix(in oklab, var(--foreground) 22%, transparent);
+  --shadow-overlay: 0 18px 48px -24px color-mix(in oklab, var(--foreground) 40%, transparent);
   --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   --sidebar: oklch(0.975 0.008 90);
