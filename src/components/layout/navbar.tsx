@@ -1,13 +1,32 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth } from "@/hooks/use-auth";
 import { PRIMARY_NAV, MOBILE_NAV, SITE } from "@/constants/navigation";
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
+  const { session, loading, signOut } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+
+  async function handleSignOut() {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      await signOut();
+      setOpen(false);
+      toast.success("You have been signed out.");
+      navigate({ to: "/", replace: true });
+    } finally {
+      setSigningOut(false);
+    }
+  }
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur">
@@ -47,15 +66,33 @@ export function Navbar() {
           </Button>
 
           <div className="hidden items-center gap-2 sm:flex">
-            <Link to="/login">
-              <Button variant="ghost" size="sm">
-                Log in
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button size="sm">Join</Button>
-            </Link>
+            {loading ? (
+              <div className="h-8 w-32 animate-pulse rounded-lg bg-secondary" aria-hidden />
+            ) : session ? (
+              <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" size="sm">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button size="sm" variant="outline" onClick={handleSignOut} disabled={signingOut}>
+                  {signingOut ? "Logging out…" : "Log out"}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">
+                    Log in
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button size="sm">Join</Button>
+                </Link>
+              </>
+            )}
           </div>
+
 
           <Button
             variant="ghost"
@@ -85,15 +122,31 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border pt-3">
-              <Link to="/login" onClick={() => setOpen(false)}>
-                <Button variant="outline" className="w-full">
-                  Log in
-                </Button>
-              </Link>
-              <Link to="/register" onClick={() => setOpen(false)}>
-                <Button className="w-full">Join</Button>
-              </Link>
+              {session ? (
+                <>
+                  <Link to="/dashboard" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Button className="w-full" onClick={handleSignOut} disabled={signingOut}>
+                    {signingOut ? "Logging out…" : "Log out"}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link to="/register" onClick={() => setOpen(false)}>
+                    <Button className="w-full">Join</Button>
+                  </Link>
+                </>
+              )}
             </div>
+
           </nav>
         </div>
       )}
