@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StyleguideRouteImport } from './routes/styleguide'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as OrganizationsRouteImport } from './routes/organizations'
@@ -33,6 +34,11 @@ const StyleguideRoute = StyleguideRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/organizations'
     | '/projects'
     | '/register'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/organizations'
     | '/projects'
     | '/register'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/organizations'
     | '/projects'
     | '/register'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/styleguide'
     | '/_authenticated/dashboard'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   OrganizationsRoute: typeof OrganizationsRoute
   ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StyleguideRoute: typeof StyleguideRoute
 }
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -353,6 +373,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrganizationsRoute: OrganizationsRoute,
   ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StyleguideRoute: StyleguideRoute,
 }
