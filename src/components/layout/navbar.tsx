@@ -66,15 +66,33 @@ export function Navbar() {
           </Button>
 
           <div className="hidden items-center gap-2 sm:flex">
-            <Link to="/login">
-              <Button variant="ghost" size="sm">
-                Log in
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button size="sm">Join</Button>
-            </Link>
+            {loading ? (
+              <div className="h-8 w-32 animate-pulse rounded-lg bg-secondary" aria-hidden />
+            ) : session ? (
+              <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" size="sm">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button size="sm" variant="outline" onClick={handleSignOut} disabled={signingOut}>
+                  {signingOut ? "Logging out…" : "Log out"}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">
+                    Log in
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button size="sm">Join</Button>
+                </Link>
+              </>
+            )}
           </div>
+
 
           <Button
             variant="ghost"
