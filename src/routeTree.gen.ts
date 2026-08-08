@@ -15,6 +15,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as OrganizationsRouteImport } from './routes/organizations'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -52,6 +53,11 @@ const OrganizationsRoute = OrganizationsRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiscoverRoute = DiscoverRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/creators': typeof CreatorsRoute
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/creators': typeof CreatorsRoute
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/creators': typeof CreatorsRoute
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRoute
   '/projects': typeof ProjectsRoute
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/creators'
     | '/discover'
+    | '/forgot-password'
     | '/login'
     | '/organizations'
     | '/projects'
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/creators'
     | '/discover'
+    | '/forgot-password'
     | '/login'
     | '/organizations'
     | '/projects'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/creators'
     | '/discover'
+    | '/forgot-password'
     | '/login'
     | '/organizations'
     | '/projects'
@@ -198,6 +210,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CreatorsRoute: typeof CreatorsRoute
   DiscoverRoute: typeof DiscoverRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   OrganizationsRoute: typeof OrganizationsRoute
   ProjectsRoute: typeof ProjectsRoute
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/discover': {
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CreatorsRoute: CreatorsRoute,
   DiscoverRoute: DiscoverRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   OrganizationsRoute: OrganizationsRoute,
   ProjectsRoute: ProjectsRoute,
