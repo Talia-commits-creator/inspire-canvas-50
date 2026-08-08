@@ -47,6 +47,7 @@ export const FOOTER_GROUPS = [
     links: [
       { to: "/login", label: "Login" },
       { to: "/register", label: "Register" },
+      { to: "/forgot-password", label: "Reset password" },
       { to: "/dashboard", label: "Dashboard" },
     ],
   },
