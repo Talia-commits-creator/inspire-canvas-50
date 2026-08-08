@@ -122,15 +122,31 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border pt-3">
-              <Link to="/login" onClick={() => setOpen(false)}>
-                <Button variant="outline" className="w-full">
-                  Log in
-                </Button>
-              </Link>
-              <Link to="/register" onClick={() => setOpen(false)}>
-                <Button className="w-full">Join</Button>
-              </Link>
+              {session ? (
+                <>
+                  <Link to="/dashboard" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Button className="w-full" onClick={handleSignOut} disabled={signingOut}>
+                    {signingOut ? "Logging out…" : "Log out"}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link to="/register" onClick={() => setOpen(false)}>
+                    <Button className="w-full">Join</Button>
+                  </Link>
+                </>
+              )}
             </div>
+
           </nav>
         </div>
       )}
