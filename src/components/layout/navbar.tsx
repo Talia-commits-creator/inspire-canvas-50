@@ -1,13 +1,32 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth } from "@/hooks/use-auth";
 import { PRIMARY_NAV, MOBILE_NAV, SITE } from "@/constants/navigation";
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
+  const { session, loading, signOut } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+
+  async function handleSignOut() {
+    if (signingOut) return;
+    setSigningOut(true);
+    try {
+      await signOut();
+      setOpen(false);
+      toast.success("You have been signed out.");
+      navigate({ to: "/", replace: true });
+    } finally {
+      setSigningOut(false);
+    }
+  }
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur">
