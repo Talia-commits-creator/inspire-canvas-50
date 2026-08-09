@@ -16,22 +16,49 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          avatar_url: string | null
+          bio: string | null
           created_at: string
           display_name: string | null
           id: string
+          location: string | null
           updated_at: string
+          username: string
+          website: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string
           display_name?: string | null
           id: string
+          location?: string | null
           updated_at?: string
+          username: string
+          website?: string | null
         }
         Update: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
+          location?: string | null
           updated_at?: string
+          username?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      reserved_usernames: {
+        Row: {
+          name: string
+        }
+        Insert: {
+          name: string
+        }
+        Update: {
+          name?: string
         }
         Relationships: []
       }
@@ -61,6 +88,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_username: { Args: { _seed: string }; Returns: string }
+      get_public_profile: {
+        Args: { _username: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          created_at: string
+          display_name: string
+          location: string
+          username: string
+          website: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -68,6 +108,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_username_available: { Args: { _username: string }; Returns: boolean }
     }
     Enums: {
       app_role: "creator" | "client" | "organization" | "admin"
