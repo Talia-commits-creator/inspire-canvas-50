@@ -22,6 +22,9 @@ export function authErrorMessage(message: string | undefined): string {
   if (raw.includes("user already registered") || raw.includes("already been registered")) {
     return "An account with this email already exists. Try signing in instead.";
   }
+  if (raw.includes("known to be weak") || raw.includes("pwned")) {
+    return "That password has appeared in a data breach. Please choose a different one.";
+  }
   if (raw.includes("password should be at least")) {
     return AUTH_MESSAGES.weakPassword;
   }
