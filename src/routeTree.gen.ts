@@ -24,9 +24,12 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
+import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
+import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
 
 const StyleguideRoute = StyleguideRouteImport.update({
   id: '/styleguide',
@@ -102,10 +105,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreatorsIndexRoute = CreatorsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CreatorsRoute,
+} as any)
 const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   id: '/profile/$username',
   path: '/profile/$username',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorsUsernameRoute = CreatorsUsernameRouteImport.update({
+  id: '/$username',
+  path: '/$username',
+  getParentRoute: () => CreatorsRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
@@ -118,13 +131,19 @@ const AuthenticatedSettingsProfileRoute =
     path: '/settings/profile',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsCreatorRoute =
+  AuthenticatedSettingsCreatorRouteImport.update({
+    id: '/settings/creator',
+    path: '/settings/creator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
+  '/creators': typeof CreatorsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -135,7 +154,10 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators/': typeof CreatorsIndexRoute
+  '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRoutesByTo {
@@ -143,7 +165,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -154,7 +175,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators': typeof CreatorsIndexRoute
+  '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRoutesById {
@@ -164,7 +188,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
+  '/creators': typeof CreatorsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -175,7 +199,10 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators/': typeof CreatorsIndexRoute
+  '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRouteTypes {
@@ -196,7 +223,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
+    | '/creators/'
+    | '/settings/creator'
     | '/settings/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -204,7 +234,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/community'
     | '/contact'
-    | '/creators'
     | '/discover'
     | '/forgot-password'
     | '/login'
@@ -215,7 +244,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
+    | '/creators'
+    | '/settings/creator'
     | '/settings/profile'
   id:
     | '__root__'
@@ -235,7 +267,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/_authenticated/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
+    | '/creators/'
+    | '/_authenticated/settings/creator'
     | '/_authenticated/settings/profile'
   fileRoutesById: FileRoutesById
 }
@@ -245,7 +280,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
-  CreatorsRoute: typeof CreatorsRoute
+  CreatorsRoute: typeof CreatorsRouteWithChildren
   DiscoverRoute: typeof DiscoverRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
@@ -365,12 +400,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/creators/': {
+      id: '/creators/'
+      path: '/'
+      fullPath: '/creators/'
+      preLoaderRoute: typeof CreatorsIndexRouteImport
+      parentRoute: typeof CreatorsRoute
+    }
     '/profile/$username': {
       id: '/profile/$username'
       path: '/profile/$username'
       fullPath: '/profile/$username'
       preLoaderRoute: typeof ProfileUsernameRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/creators/$username': {
+      id: '/creators/$username'
+      path: '/$username'
+      fullPath: '/creators/$username'
+      preLoaderRoute: typeof CreatorsUsernameRouteImport
+      parentRoute: typeof CreatorsRoute
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
@@ -386,21 +435,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/creator': {
+      id: '/_authenticated/settings/creator'
+      path: '/settings/creator'
+      fullPath: '/settings/creator'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface CreatorsRouteChildren {
+  CreatorsUsernameRoute: typeof CreatorsUsernameRoute
+  CreatorsIndexRoute: typeof CreatorsIndexRoute
+}
+
+const CreatorsRouteChildren: CreatorsRouteChildren = {
+  CreatorsUsernameRoute: CreatorsUsernameRoute,
+  CreatorsIndexRoute: CreatorsIndexRoute,
+}
+
+const CreatorsRouteWithChildren = CreatorsRoute._addFileChildren(
+  CreatorsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -408,7 +480,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
-  CreatorsRoute: CreatorsRoute,
+  CreatorsRoute: CreatorsRouteWithChildren,
   DiscoverRoute: DiscoverRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,

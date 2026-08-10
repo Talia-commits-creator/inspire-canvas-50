@@ -1,14 +1,9 @@
 /* Placeholder content used to demonstrate visual patterns only. */
 
-export type CreatorSample = {
-  id: string;
-  name: string;
-  category: string;
-  location: string;
-  description: string;
-  availability: "Available" | "Limited" | "Booked";
-  verified: boolean;
-};
+import type { CreatorCardData } from "@/components/entities/creator-card";
+
+/** Design-only samples that follow the real creator profile structure. */
+export type CreatorSample = CreatorCardData & { id: string };
 
 export type OrganizationSample = {
   id: string;
@@ -31,24 +26,24 @@ export type ProjectSample = {
 export const CREATOR_SAMPLES: CreatorSample[] = [
   {
     id: "c1",
+    username: "amaraboateng",
     name: "Amara Boateng",
-    category: "Documentary photography",
+    headline: "Documentary photographer & visual storyteller",
+    primaryCategory: "Photographer",
     location: "Accra, Ghana",
-    description:
-      "Long-form photo essays on community, craft and everyday life across West Africa.",
-    availability: "Available",
-    verified: true,
+    availability: "available",
   },
   {
     id: "c2",
+    username: "iliasmarchetti",
     name: "Ilias Marchetti",
-    category: "Sound design & scoring",
+    headline: "Producer | Sound design & scoring for film",
+    primaryCategory: "Producer",
     location: "Lisbon, Portugal",
-    description: "Original scores and mixes for short film, installation and independent games.",
-    availability: "Limited",
-    verified: false,
+    availability: "limited",
   },
 ];
+
 
 export const ORGANIZATION_SAMPLES: OrganizationSample[] = [
   {
