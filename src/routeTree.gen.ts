@@ -26,6 +26,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
+import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
@@ -114,6 +115,11 @@ const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   path: '/profile/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreatorsUsernameRoute = CreatorsUsernameRouteImport.update({
+  id: '/$username',
+  path: '/$username',
+  getParentRoute: () => CreatorsRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
@@ -191,6 +199,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/creators/$username': typeof CreatorsUsernameRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
     | '/creators/'
     | '/settings/creator'
@@ -234,6 +244,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
     | '/creators'
     | '/settings/creator'
@@ -256,6 +267,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/styleguide'
     | '/_authenticated/dashboard'
+    | '/creators/$username'
     | '/profile/$username'
     | '/creators/'
     | '/_authenticated/settings/creator'
@@ -402,6 +414,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/creators/$username': {
+      id: '/creators/$username'
+      path: '/$username'
+      fullPath: '/creators/$username'
+      preLoaderRoute: typeof CreatorsUsernameRouteImport
+      parentRoute: typeof CreatorsRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -442,10 +461,12 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface CreatorsRouteChildren {
+  CreatorsUsernameRoute: typeof CreatorsUsernameRoute
   CreatorsIndexRoute: typeof CreatorsIndexRoute
 }
 
 const CreatorsRouteChildren: CreatorsRouteChildren = {
+  CreatorsUsernameRoute: CreatorsUsernameRoute,
   CreatorsIndexRoute: CreatorsIndexRoute,
 }
 
