@@ -34,7 +34,7 @@ export const Route = createFileRoute("/creators/")({
 });
 
 function CreatorsIndexPage() {
-  const { creators } = Route.useLoaderData();
+  const { creators } = Route.useLoaderData() as { creators: CreatorListItem[] };
 
   return (
     <SiteLayout>
