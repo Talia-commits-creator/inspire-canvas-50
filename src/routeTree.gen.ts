@@ -27,6 +27,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
+import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
 
 const StyleguideRoute = StyleguideRouteImport.update({
   id: '/styleguide',
@@ -118,6 +119,12 @@ const AuthenticatedSettingsProfileRoute =
     path: '/settings/profile',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsCreatorRoute =
+  AuthenticatedSettingsCreatorRouteImport.update({
+    id: '/settings/creator',
+    path: '/settings/creator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRoutesByTo {
@@ -155,6 +163,7 @@ export interface FileRoutesByTo {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRoutesById {
@@ -176,6 +185,7 @@ export interface FileRoutesById {
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
 export interface FileRouteTypes {
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/profile/$username'
+    | '/settings/creator'
     | '/settings/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/profile/$username'
+    | '/settings/creator'
     | '/settings/profile'
   id:
     | '__root__'
@@ -236,6 +248,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/_authenticated/dashboard'
     | '/profile/$username'
+    | '/_authenticated/settings/creator'
     | '/_authenticated/settings/profile'
   fileRoutesById: FileRoutesById
 }
@@ -386,16 +399,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/creator': {
+      id: '/_authenticated/settings/creator'
+      path: '/settings/creator'
+      fullPath: '/settings/creator'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
 }
 
