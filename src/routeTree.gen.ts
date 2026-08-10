@@ -24,6 +24,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
@@ -103,6 +104,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreatorsIndexRoute = CreatorsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CreatorsRoute,
+} as any)
 const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   id: '/profile/$username',
   path: '/profile/$username',
@@ -131,7 +137,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
+  '/creators': typeof CreatorsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators/': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
@@ -151,7 +158,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -163,6 +169,7 @@ export interface FileRoutesByTo {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
@@ -173,7 +180,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
-  '/creators': typeof CreatorsRoute
+  '/creators': typeof CreatorsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
@@ -185,6 +192,7 @@ export interface FileRoutesById {
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/profile/$username': typeof ProfileUsernameRoute
+  '/creators/': typeof CreatorsIndexRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
 }
@@ -207,6 +215,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/profile/$username'
+    | '/creators/'
     | '/settings/creator'
     | '/settings/profile'
   fileRoutesByTo: FileRoutesByTo
@@ -215,7 +224,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/community'
     | '/contact'
-    | '/creators'
     | '/discover'
     | '/forgot-password'
     | '/login'
@@ -227,6 +235,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/profile/$username'
+    | '/creators'
     | '/settings/creator'
     | '/settings/profile'
   id:
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/_authenticated/dashboard'
     | '/profile/$username'
+    | '/creators/'
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/profile'
   fileRoutesById: FileRoutesById
@@ -258,7 +268,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
-  CreatorsRoute: typeof CreatorsRoute
+  CreatorsRoute: typeof CreatorsRouteWithChildren
   DiscoverRoute: typeof DiscoverRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
@@ -378,6 +388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/creators/': {
+      id: '/creators/'
+      path: '/'
+      fullPath: '/creators/'
+      preLoaderRoute: typeof CreatorsIndexRouteImport
+      parentRoute: typeof CreatorsRoute
+    }
     '/profile/$username': {
       id: '/profile/$username'
       path: '/profile/$username'
@@ -424,13 +441,25 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface CreatorsRouteChildren {
+  CreatorsIndexRoute: typeof CreatorsIndexRoute
+}
+
+const CreatorsRouteChildren: CreatorsRouteChildren = {
+  CreatorsIndexRoute: CreatorsIndexRoute,
+}
+
+const CreatorsRouteWithChildren = CreatorsRoute._addFileChildren(
+  CreatorsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
-  CreatorsRoute: CreatorsRoute,
+  CreatorsRoute: CreatorsRouteWithChildren,
   DiscoverRoute: DiscoverRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
