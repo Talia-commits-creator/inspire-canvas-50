@@ -14,6 +14,185 @@ export type Database = {
   }
   public: {
     Tables: {
+      creative_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      creative_skills: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      creator_profile_categories: {
+        Row: {
+          category_id: string
+          created_at: string
+          creator_profile_id: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          creator_profile_id: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          creator_profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_profile_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "creative_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "creator_profile_categories_creator_profile_id_fkey"
+            columns: ["creator_profile_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creator_profile_skills: {
+        Row: {
+          created_at: string
+          creator_profile_id: string
+          skill_id: string
+        }
+        Insert: {
+          created_at?: string
+          creator_profile_id: string
+          skill_id: string
+        }
+        Update: {
+          created_at?: string
+          creator_profile_id?: string
+          skill_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_profile_skills_creator_profile_id_fkey"
+            columns: ["creator_profile_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "creator_profile_skills_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "creative_skills"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creator_profiles: {
+        Row: {
+          about: string | null
+          availability: Database["public"]["Enums"]["creator_availability"]
+          created_at: string
+          creator_name: string | null
+          experience_level: Database["public"]["Enums"]["creator_experience"]
+          headline: string
+          id: string
+          links: Json
+          location: string | null
+          primary_category_id: string | null
+          updated_at: string
+          user_id: string
+          visibility: Database["public"]["Enums"]["creator_visibility"]
+          website: string | null
+          years_experience: number | null
+        }
+        Insert: {
+          about?: string | null
+          availability?: Database["public"]["Enums"]["creator_availability"]
+          created_at?: string
+          creator_name?: string | null
+          experience_level?: Database["public"]["Enums"]["creator_experience"]
+          headline: string
+          id?: string
+          links?: Json
+          location?: string | null
+          primary_category_id?: string | null
+          updated_at?: string
+          user_id: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+          website?: string | null
+          years_experience?: number | null
+        }
+        Update: {
+          about?: string | null
+          availability?: Database["public"]["Enums"]["creator_availability"]
+          created_at?: string
+          creator_name?: string | null
+          experience_level?: Database["public"]["Enums"]["creator_experience"]
+          headline?: string
+          id?: string
+          links?: Json
+          location?: string | null
+          primary_category_id?: string | null
+          updated_at?: string
+          user_id?: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+          website?: string | null
+          years_experience?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_profiles_primary_category_id_fkey"
+            columns: ["primary_category_id"]
+            isOneToOne: false
+            referencedRelation: "creative_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -89,6 +268,7 @@ export type Database = {
     }
     Functions: {
       generate_username: { Args: { _seed: string }; Returns: string }
+      get_public_creator_profile: { Args: { _username: string }; Returns: Json }
       get_public_profile: {
         Args: { _username: string }
         Returns: {
@@ -109,9 +289,17 @@ export type Database = {
         Returns: boolean
       }
       is_username_available: { Args: { _username: string }; Returns: boolean }
+      list_public_creators: { Args: { _limit?: number }; Returns: Json }
     }
     Enums: {
       app_role: "creator" | "client" | "organization" | "admin"
+      creator_availability: "available" | "limited" | "unavailable"
+      creator_experience:
+        | "beginner"
+        | "intermediate"
+        | "experienced"
+        | "professional"
+      creator_visibility: "public" | "private"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -240,6 +428,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["creator", "client", "organization", "admin"],
+      creator_availability: ["available", "limited", "unavailable"],
+      creator_experience: [
+        "beginner",
+        "intermediate",
+        "experienced",
+        "professional",
+      ],
+      creator_visibility: ["public", "private"],
     },
   },
 } as const
