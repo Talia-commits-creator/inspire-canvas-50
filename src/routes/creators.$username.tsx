@@ -14,6 +14,7 @@ import {
   creatorDisplayName,
   type CreatorAvailability,
   type LinkPlatform,
+  type PublicCreatorProfile,
 } from "@/lib/creator";
 
 const AVAILABILITY_VARIANT: Record<CreatorAvailability, "success" | "gold" | "muted"> = {
@@ -24,7 +25,9 @@ const AVAILABILITY_VARIANT: Record<CreatorAvailability, "success" | "gold" | "mu
 
 export const Route = createFileRoute("/creators/$username")({
   loader: async ({ params }) => {
-    const profile = await getPublicCreatorProfile({ data: { username: params.username } });
+    const profile = (await getPublicCreatorProfile({
+      data: { username: params.username },
+    })) as PublicCreatorProfile | null;
     if (!profile) throw notFound();
     return { profile };
   },
@@ -90,7 +93,7 @@ function PublicCreatorPage() {
   const links = LINK_PLATFORMS.map((platform) => ({
     label: platform.label,
     href: creator.links?.[platform.key as LinkPlatform],
-  })).filter((link): link is { label: string; href: string } => Boolean(link.href));
+  })).filter((link) => Boolean(link.href)) as { label: string; href: string }[];
 
   return (
     <SiteLayout>

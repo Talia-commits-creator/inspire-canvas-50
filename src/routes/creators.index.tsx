@@ -5,9 +5,10 @@ import { EmptyState } from "@/components/common/empty-state";
 import { Button } from "@/components/ui/button";
 import { CreatorCard } from "@/components/entities/creator-card";
 import { listPublicCreators } from "@/lib/creator.functions";
+import type { CreatorListItem } from "@/lib/creator";
 
 export const Route = createFileRoute("/creators/")({
-  loader: async () => ({ creators: await listPublicCreators() }),
+  loader: async () => ({ creators: (await listPublicCreators()) as CreatorListItem[] }),
   head: () => ({
     meta: [
       { title: "Creators — Inspire to Aspire" },
