@@ -90,7 +90,11 @@ export const Route = createFileRoute("/creators/$username")({
 });
 
 function PublicCreatorPage() {
-  const { profile } = Route.useLoaderData() as { profile: PublicCreatorProfile };
+  const { profile, portfolio } = Route.useLoaderData() as {
+    profile: PublicCreatorProfile;
+    portfolio: PublicPortfolioItem[];
+  };
+
   const creator = profile.creator;
   const name = creatorDisplayName(creator.creator_name, profile.display_name, profile.username);
   const location = creator.location ?? profile.profile_location;
