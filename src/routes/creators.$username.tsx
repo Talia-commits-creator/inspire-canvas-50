@@ -227,16 +227,10 @@ function PublicCreatorPage() {
             <CardTitle className="font-display text-xl">Portfolio</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[0, 1, 2].map((index) => (
-                <div key={index} className="photo-placeholder aspect-[4/3] w-full rounded-lg" aria-hidden />
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Selected work from {name} arrives with the portfolio phase.
-            </p>
+            <PortfolioShowcase items={portfolio} creatorName={name} />
           </CardContent>
         </Card>
+
       </div>
     </SiteLayout>
   );
