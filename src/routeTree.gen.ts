@@ -30,6 +30,7 @@ import { Route as CreatorsUsernameRouteImport } from './routes/creators.$usernam
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
+import { Route as AuthenticatedSettingsCreatorPortfolioRouteImport } from './routes/_authenticated/settings.creator_.portfolio'
 
 const StyleguideRoute = StyleguideRouteImport.update({
   id: '/styleguide',
@@ -137,6 +138,12 @@ const AuthenticatedSettingsCreatorRoute =
     path: '/settings/creator',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsCreatorPortfolioRoute =
+  AuthenticatedSettingsCreatorPortfolioRouteImport.update({
+    id: '/settings/creator_/portfolio',
+    path: '/settings/creator/portfolio',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/creators/': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -180,6 +188,7 @@ export interface FileRoutesByTo {
   '/creators': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -204,6 +213,7 @@ export interface FileRoutesById {
   '/creators/': typeof CreatorsIndexRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/_authenticated/settings/creator_/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/creators/'
     | '/settings/creator'
     | '/settings/profile'
+    | '/settings/creator/portfolio'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/creators'
     | '/settings/creator'
     | '/settings/profile'
+    | '/settings/creator/portfolio'
   id:
     | '__root__'
     | '/'
@@ -272,6 +284,7 @@ export interface FileRouteTypes {
     | '/creators/'
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/profile'
+    | '/_authenticated/settings/creator_/portfolio'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -442,6 +455,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/creator_/portfolio': {
+      id: '/_authenticated/settings/creator_/portfolio'
+      path: '/settings/creator/portfolio'
+      fullPath: '/settings/creator/portfolio'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorPortfolioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -449,12 +469,15 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
+  AuthenticatedSettingsCreatorPortfolioRoute: typeof AuthenticatedSettingsCreatorPortfolioRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
+  AuthenticatedSettingsCreatorPortfolioRoute:
+    AuthenticatedSettingsCreatorPortfolioRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

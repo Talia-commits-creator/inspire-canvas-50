@@ -6,7 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPublicCreatorProfile } from "@/lib/creator.functions";
+import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import type { PublicPortfolioItem } from "@/lib/portfolio";
+
+import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
 import { initialsFrom } from "@/lib/profile";
+
 import {
   AVAILABILITY_LABELS,
   EXPERIENCE_LABELS,
@@ -29,8 +34,10 @@ export const Route = createFileRoute("/creators/$username")({
       data: { username: params.username },
     })) as PublicCreatorProfile | null;
     if (!profile) throw notFound();
-    return { profile };
+    const portfolio = await getPublicPortfolio({ data: { username: params.username } });
+    return { profile, portfolio };
   },
+
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
@@ -85,7 +92,11 @@ export const Route = createFileRoute("/creators/$username")({
 });
 
 function PublicCreatorPage() {
-  const { profile } = Route.useLoaderData() as { profile: PublicCreatorProfile };
+  const { profile, portfolio } = Route.useLoaderData() as {
+    profile: PublicCreatorProfile;
+    portfolio: PublicPortfolioItem[];
+  };
+
   const creator = profile.creator;
   const name = creatorDisplayName(creator.creator_name, profile.display_name, profile.username);
   const location = creator.location ?? profile.profile_location;
@@ -222,16 +233,10 @@ function PublicCreatorPage() {
             <CardTitle className="font-display text-xl">Portfolio</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[0, 1, 2].map((index) => (
-                <div key={index} className="photo-placeholder aspect-[4/3] w-full rounded-lg" aria-hidden />
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Selected work from {name} arrives with the portfolio phase.
-            </p>
+            <PortfolioShowcase items={portfolio} creatorName={name} />
           </CardContent>
         </Card>
+
       </div>
     </SiteLayout>
   );
