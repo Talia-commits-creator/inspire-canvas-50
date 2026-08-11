@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPublicCreatorProfile } from "@/lib/creator.functions";
 import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import type { PublicPortfolioItem } from "@/lib/portfolio";
+
 import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
 import { initialsFrom } from "@/lib/profile";
 
