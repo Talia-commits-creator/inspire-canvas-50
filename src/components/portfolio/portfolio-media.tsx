@@ -83,9 +83,8 @@ export function PortfolioPlayer({ source }: { source: MediaSource }) {
         className="max-h-[60vh] w-full rounded-lg bg-secondary"
         aria-label={`Video: ${title}`}
       >
-        <track kind="captions" />
-      Your browser cannot play this video.
-        <source src={mediaUrl} />
+          <source src={mediaUrl} />
+        Your browser cannot play this video.
       </video>
     );
   }
