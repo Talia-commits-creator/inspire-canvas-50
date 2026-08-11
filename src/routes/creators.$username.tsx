@@ -6,7 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPublicCreatorProfile } from "@/lib/creator.functions";
+import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
 import { initialsFrom } from "@/lib/profile";
+
 import {
   AVAILABILITY_LABELS,
   EXPERIENCE_LABELS,
@@ -29,8 +32,10 @@ export const Route = createFileRoute("/creators/$username")({
       data: { username: params.username },
     })) as PublicCreatorProfile | null;
     if (!profile) throw notFound();
-    return { profile };
+    const portfolio = await getPublicPortfolio({ data: { username: params.username } });
+    return { profile, portfolio };
   },
+
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {

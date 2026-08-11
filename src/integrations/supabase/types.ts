@@ -193,6 +193,102 @@ export type Database = {
           },
         ]
       }
+      portfolio_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      portfolio_items: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          creator_profile_id: string
+          description: string | null
+          external_url: string | null
+          id: string
+          is_featured: boolean
+          media_path: string | null
+          media_type: Database["public"]["Enums"]["portfolio_media_type"]
+          position: number
+          thumbnail_path: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          visibility: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          creator_profile_id: string
+          description?: string | null
+          external_url?: string | null
+          id?: string
+          is_featured?: boolean
+          media_path?: string | null
+          media_type: Database["public"]["Enums"]["portfolio_media_type"]
+          position?: number
+          thumbnail_path?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          creator_profile_id?: string
+          description?: string | null
+          external_url?: string | null
+          id?: string
+          is_featured?: boolean
+          media_path?: string | null
+          media_type?: Database["public"]["Enums"]["portfolio_media_type"]
+          position?: number
+          thumbnail_path?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolio_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "portfolio_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "portfolio_items_creator_profile_id_fkey"
+            columns: ["creator_profile_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -269,6 +365,7 @@ export type Database = {
     Functions: {
       generate_username: { Args: { _seed: string }; Returns: string }
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
+      get_public_portfolio: { Args: { _username: string }; Returns: Json }
       get_public_profile: {
         Args: { _username: string }
         Returns: {
@@ -300,6 +397,7 @@ export type Database = {
         | "experienced"
         | "professional"
       creator_visibility: "public" | "private"
+      portfolio_media_type: "image" | "video" | "audio" | "link"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -436,6 +534,7 @@ export const Constants = {
         "professional",
       ],
       creator_visibility: ["public", "private"],
+      portfolio_media_type: ["image", "video", "audio", "link"],
     },
   },
 } as const
