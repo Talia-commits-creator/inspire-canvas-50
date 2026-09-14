@@ -9,87 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as StyleguideRouteImport } from './routes/styleguide'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as OrganizationsRouteImport } from './routes/organizations'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as DiscoverRouteImport } from './routes/discover'
-import { Route as CreatorsRouteImport } from './routes/creators'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CommunityRouteImport } from './routes/community'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
-import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
-import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CreatorsRouteImport } from './routes/creators'
+import { Route as DiscoverRouteImport } from './routes/discover'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OrganizationsRouteImport } from './routes/organizations'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as StyleguideRouteImport } from './routes/styleguide'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
+import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
+import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
+import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
+import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
 import { Route as AuthenticatedSettingsCreatorPortfolioRouteImport } from './routes/_authenticated/settings.creator_.portfolio'
+import { Route as AuthenticatedSettingsCreatorServicesRouteImport } from './routes/_authenticated/settings.creator_.services'
 
-const StyleguideRoute = StyleguideRouteImport.update({
-  id: '/styleguide',
-  path: '/styleguide',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OrganizationsRoute = OrganizationsRouteImport.update({
-  id: '/organizations',
-  path: '/organizations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiscoverRoute = DiscoverRouteImport.update({
-  id: '/discover',
-  path: '/discover',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreatorsRoute = CreatorsRouteImport.update({
-  id: '/creators',
-  path: '/creators',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -97,18 +47,79 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorsRoute = CreatorsRouteImport.update({
+  id: '/creators',
+  path: '/creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiscoverRoute = DiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizationsRoute = OrganizationsRouteImport.update({
+  id: '/organizations',
+  path: '/organizations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StyleguideRoute = StyleguideRouteImport.update({
+  id: '/styleguide',
+  path: '/styleguide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const CreatorsIndexRoute = CreatorsIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => CreatorsRoute,
+} as any)
+const CreatorsUsernameRoute = CreatorsUsernameRouteImport.update({
+  id: '/$username',
+  path: '/$username',
   getParentRoute: () => CreatorsRoute,
 } as any)
 const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
@@ -116,32 +127,28 @@ const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   path: '/profile/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CreatorsUsernameRoute = CreatorsUsernameRouteImport.update({
-  id: '/$username',
-  path: '/$username',
-  getParentRoute: () => CreatorsRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedSettingsProfileRoute =
-  AuthenticatedSettingsProfileRouteImport.update({
-    id: '/settings/profile',
-    path: '/settings/profile',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedSettingsCreatorRoute =
   AuthenticatedSettingsCreatorRouteImport.update({
     id: '/settings/creator',
     path: '/settings/creator',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsProfileRoute =
+  AuthenticatedSettingsProfileRouteImport.update({
+    id: '/settings/profile',
+    path: '/settings/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsCreatorPortfolioRoute =
   AuthenticatedSettingsCreatorPortfolioRouteImport.update({
     id: '/settings/creator_/portfolio',
     path: '/settings/creator/portfolio',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsCreatorServicesRoute =
+  AuthenticatedSettingsCreatorServicesRouteImport.update({
+    id: '/settings/creator_/services',
+    path: '/settings/creator/services',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -167,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
+  '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -189,6 +197,7 @@ export interface FileRoutesByTo {
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
+  '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -214,6 +223,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/_authenticated/settings/creator_/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
+  '/_authenticated/settings/creator_/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/settings/creator'
     | '/settings/profile'
     | '/settings/creator/portfolio'
+    | '/settings/creator/services'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/settings/creator'
     | '/settings/profile'
     | '/settings/creator/portfolio'
+    | '/settings/creator/services'
   id:
     | '__root__'
     | '/'
@@ -285,6 +297,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/profile'
     | '/_authenticated/settings/creator_/portfolio'
+    | '/_authenticated/settings/creator_/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -308,95 +321,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/styleguide': {
-      id: '/styleguide'
-      path: '/styleguide'
-      fullPath: '/styleguide'
-      preLoaderRoute: typeof StyleguideRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/organizations': {
-      id: '/organizations'
-      path: '/organizations'
-      fullPath: '/organizations'
-      preLoaderRoute: typeof OrganizationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/discover': {
-      id: '/discover'
-      path: '/discover'
-      fullPath: '/discover'
-      preLoaderRoute: typeof DiscoverRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/creators': {
-      id: '/creators'
-      path: '/creators'
-      fullPath: '/creators'
-      preLoaderRoute: typeof CreatorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -406,18 +335,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creators': {
+      id: '/creators'
+      path: '/creators'
+      fullPath: '/creators'
+      preLoaderRoute: typeof CreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discover': {
+      id: '/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof DiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizations': {
+      id: '/organizations'
+      path: '/organizations'
+      fullPath: '/organizations'
+      preLoaderRoute: typeof OrganizationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/styleguide': {
+      id: '/styleguide'
+      path: '/styleguide'
+      fullPath: '/styleguide'
+      preLoaderRoute: typeof StyleguideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/creators/': {
       id: '/creators/'
       path: '/'
       fullPath: '/creators/'
       preLoaderRoute: typeof CreatorsIndexRouteImport
+      parentRoute: typeof CreatorsRoute
+    }
+    '/creators/$username': {
+      id: '/creators/$username'
+      path: '/$username'
+      fullPath: '/creators/$username'
+      preLoaderRoute: typeof CreatorsUsernameRouteImport
       parentRoute: typeof CreatorsRoute
     }
     '/profile/$username': {
@@ -427,18 +454,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/creators/$username': {
-      id: '/creators/$username'
-      path: '/$username'
-      fullPath: '/creators/$username'
-      preLoaderRoute: typeof CreatorsUsernameRouteImport
-      parentRoute: typeof CreatorsRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+    '/_authenticated/settings/creator': {
+      id: '/_authenticated/settings/creator'
+      path: '/settings/creator'
+      fullPath: '/settings/creator'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings/profile': {
@@ -448,18 +468,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/settings/creator': {
-      id: '/_authenticated/settings/creator'
-      path: '/settings/creator'
-      fullPath: '/settings/creator'
-      preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/settings/creator_/portfolio': {
       id: '/_authenticated/settings/creator_/portfolio'
       path: '/settings/creator/portfolio'
       fullPath: '/settings/creator/portfolio'
       preLoaderRoute: typeof AuthenticatedSettingsCreatorPortfolioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/creator_/services': {
+      id: '/_authenticated/settings/creator_/services'
+      path: '/settings/creator/services'
+      fullPath: '/settings/creator/services'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorServicesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -470,6 +490,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
   AuthenticatedSettingsCreatorPortfolioRoute: typeof AuthenticatedSettingsCreatorPortfolioRoute
+  AuthenticatedSettingsCreatorServicesRoute: typeof AuthenticatedSettingsCreatorServicesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -478,6 +499,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
   AuthenticatedSettingsCreatorPortfolioRoute:
     AuthenticatedSettingsCreatorPortfolioRoute,
+  AuthenticatedSettingsCreatorServicesRoute:
+    AuthenticatedSettingsCreatorServicesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

@@ -432,6 +432,7 @@ export type Database = {
       generate_username: { Args: { _seed: string }; Returns: string }
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
       get_public_portfolio: { Args: { _username: string }; Returns: Json }
+      get_public_services: { Args: { _username: string }; Returns: Json }
       get_public_profile: {
         Args: { _username: string }
         Returns: {

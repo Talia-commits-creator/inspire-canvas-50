@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Globe, MapPin } from "lucide-react";
+import { Clock, Globe, MapPin } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPublicCreatorProfile } from "@/lib/creator.functions";
 import { getPublicPortfolio } from "@/lib/portfolio.functions";
+import { getPublicServices } from "@/lib/service.functions";
 import type { PublicPortfolioItem } from "@/lib/portfolio";
+import { formatServicePrice, formatTurnaround, type PublicServiceItem } from "@/lib/service";
 
 import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
 import { initialsFrom } from "@/lib/profile";
@@ -35,7 +37,8 @@ export const Route = createFileRoute("/creators/$username")({
     })) as PublicCreatorProfile | null;
     if (!profile) throw notFound();
     const portfolio = await getPublicPortfolio({ data: { username: params.username } });
-    return { profile, portfolio };
+    const services = await getPublicServices({ data: { username: params.username } });
+    return { profile, portfolio, services };
   },
 
   head: ({ loaderData }) => {
@@ -92,9 +95,10 @@ export const Route = createFileRoute("/creators/$username")({
 });
 
 function PublicCreatorPage() {
-  const { profile, portfolio } = Route.useLoaderData() as {
+  const { profile, portfolio, services } = Route.useLoaderData() as {
     profile: PublicCreatorProfile;
     portfolio: PublicPortfolioItem[];
+    services: PublicServiceItem[];
   };
 
   const creator = profile.creator;
@@ -236,6 +240,61 @@ function PublicCreatorPage() {
             <PortfolioShowcase items={portfolio} creatorName={name} />
           </CardContent>
         </Card>
+
+        {services && services.length > 0 ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-display text-xl">Services</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {services.map((service) => {
+                  const turnaroundText = formatTurnaround(service.turnaround_days);
+                  const priceText = formatServicePrice(
+                    service.pricing_type,
+                    service.price,
+                    service.currency,
+                  );
+                  return (
+                    <div
+                      key={service.id}
+                      className="flex flex-col justify-between rounded-xl border border-border bg-card p-5"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {service.category ? (
+                            <Badge variant="secondary">{service.category.name}</Badge>
+                          ) : null}
+                          {turnaroundText ? (
+                            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                              <Clock className="size-3.5" aria-hidden />
+                              {turnaroundText}
+                            </span>
+                          ) : null}
+                        </div>
+                        <div className="space-y-1">
+                          <h3 className="font-display text-base font-semibold leading-snug">
+                            {service.title}
+                          </h3>
+                          {service.description ? (
+                            <p className="whitespace-pre-line text-sm text-muted-foreground line-clamp-3">
+                              {service.description}
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                        <span className="font-display text-base font-semibold text-foreground">
+                          {priceText}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        ) : null}
 
       </div>
     </SiteLayout>
