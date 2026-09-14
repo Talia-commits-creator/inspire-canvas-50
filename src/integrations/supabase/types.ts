@@ -337,6 +337,72 @@ export type Database = {
         }
         Relationships: []
       }
+      services: {
+        Row: {
+          category_id: string
+          created_at: string
+          creator_profile_id: string
+          currency: string
+          description: string
+          id: string
+          position: number
+          price: number | null
+          pricing_type: Database["public"]["Enums"]["service_pricing_type"]
+          title: string
+          turnaround_days: number | null
+          updated_at: string
+          user_id: string
+          visibility: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          creator_profile_id: string
+          currency?: string
+          description: string
+          id?: string
+          position?: number
+          price?: number | null
+          pricing_type: Database["public"]["Enums"]["service_pricing_type"]
+          title: string
+          turnaround_days?: number | null
+          updated_at?: string
+          user_id: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          creator_profile_id?: string
+          currency?: string
+          description?: string
+          id?: string
+          position?: number
+          price?: number | null
+          pricing_type?: Database["public"]["Enums"]["service_pricing_type"]
+          title?: string
+          turnaround_days?: number | null
+          updated_at?: string
+          user_id?: string
+          visibility?: Database["public"]["Enums"]["creator_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "creative_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "services_creator_profile_id_fkey"
+            columns: ["creator_profile_id"]
+            isOneToOne: false
+            referencedRelation: "creator_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -378,6 +444,7 @@ export type Database = {
           website: string
         }[]
       }
+      get_public_services: { Args: { _username: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -398,6 +465,7 @@ export type Database = {
         | "professional"
       creator_visibility: "public" | "private"
       portfolio_media_type: "image" | "video" | "audio" | "link"
+      service_pricing_type: "fixed" | "starting_from" | "contact"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -535,6 +603,7 @@ export const Constants = {
       ],
       creator_visibility: ["public", "private"],
       portfolio_media_type: ["image", "video", "audio", "link"],
+      service_pricing_type: ["fixed", "starting_from", "contact"],
     },
   },
 } as const
