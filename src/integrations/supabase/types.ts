@@ -193,6 +193,57 @@ export type Database = {
           },
         ]
       }
+      organizations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          links: Json
+          location: string | null
+          logo_path: string | null
+          name: string
+          organization_type: string
+          owner_id: string
+          short_description: string
+          slug: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["organization_visibility"]
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          links?: Json
+          location?: string | null
+          logo_path?: string | null
+          name: string
+          organization_type: string
+          owner_id: string
+          short_description?: string
+          slug: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["organization_visibility"]
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          links?: Json
+          location?: string | null
+          logo_path?: string | null
+          name?: string
+          organization_type?: string
+          owner_id?: string
+          short_description?: string
+          slug?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["organization_visibility"]
+          website?: string | null
+        }
+        Relationships: []
+      }
       portfolio_categories: {
         Row: {
           created_at: string
@@ -431,6 +482,7 @@ export type Database = {
     Functions: {
       generate_username: { Args: { _seed: string }; Returns: string }
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
+      get_public_organization: { Args: { _slug: string }; Returns: Json }
       get_public_portfolio: { Args: { _username: string }; Returns: Json }
       get_public_profile: {
         Args: { _username: string }
@@ -454,6 +506,7 @@ export type Database = {
       }
       is_username_available: { Args: { _username: string }; Returns: boolean }
       list_public_creators: { Args: { _limit?: number }; Returns: Json }
+      list_public_organizations: { Args: { _limit?: number }; Returns: Json }
     }
     Enums: {
       app_role: "creator" | "client" | "organization" | "admin"
@@ -464,6 +517,7 @@ export type Database = {
         | "experienced"
         | "professional"
       creator_visibility: "public" | "private"
+      organization_visibility: "public" | "private"
       portfolio_media_type: "image" | "video" | "audio" | "link"
       service_pricing_type: "fixed" | "starting_from" | "contact"
     }
@@ -602,6 +656,7 @@ export const Constants = {
         "professional",
       ],
       creator_visibility: ["public", "private"],
+      organization_visibility: ["public", "private"],
       portfolio_media_type: ["image", "video", "audio", "link"],
       service_pricing_type: ["fixed", "starting_from", "contact"],
     },
