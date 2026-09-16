@@ -31,7 +31,10 @@ export const Route = createFileRoute("/_authenticated/settings/creator")({
         content: "Set up your creative identity, categories, skills and availability as a creator.",
       },
       { property: "og:title", content: "Creator profile — Inspire to Aspire" },
-      { property: "og:description", content: "Define what you create and how people can work with you." },
+      {
+        property: "og:description",
+        content: "Define what you create and how people can work with you.",
+      },
     ],
   }),
   component: CreatorProfileSettingsPage,
@@ -67,7 +70,9 @@ function CreatorProfileSettingsPage() {
         availability: existing.profile.availability,
         experience_level: existing.profile.experience_level,
         years_experience:
-          existing.profile.years_experience === null ? "" : String(existing.profile.years_experience),
+          existing.profile.years_experience === null
+            ? ""
+            : String(existing.profile.years_experience),
         website: existing.profile.website ?? "",
         links,
         visibility: existing.profile.visibility,
@@ -82,7 +87,9 @@ function CreatorProfileSettingsPage() {
     setFormError(null);
     save.mutate(toCreatorInput(next), {
       onSuccess: () => {
-        toast.success(mode === "create" ? "Your creator profile is live." : "Creator profile updated.");
+        toast.success(
+          mode === "create" ? "Your creator profile is live." : "Creator profile updated.",
+        );
       },
       onError: (error: unknown) => {
         setFormError(creatorErrorMessage((error as { message?: string })?.message));
@@ -105,9 +112,14 @@ function CreatorProfileSettingsPage() {
         }
         actions={
           existing && username ? (
-            <Link to="/creators/$username" params={{ username }}>
-              <Button variant="outline">View public profile</Button>
-            </Link>
+            <div className="flex flex-wrap gap-2">
+              <Link to="/creators/$username" params={{ username }}>
+                <Button variant="outline">View public profile</Button>
+              </Link>
+              <Link to="/settings/creator/bookings">
+                <Button variant="outline">Booking requests</Button>
+              </Link>
+            </div>
           ) : null
         }
       />

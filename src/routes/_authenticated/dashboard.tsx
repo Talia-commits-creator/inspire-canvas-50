@@ -58,6 +58,9 @@ function DashboardPage() {
             <Link to="/settings/profile">
               <Button>Edit profile</Button>
             </Link>
+            <Link to="/settings/bookings">
+              <Button variant="outline">My bookings</Button>
+            </Link>
             <Button variant="outline" onClick={handleSignOut} disabled={signingOut}>
               {signingOut ? "Logging out…" : "Log out"}
             </Button>
@@ -106,7 +109,9 @@ function DashboardPage() {
                     <p className="font-display text-lg font-semibold">
                       {profile.display_name ?? "Add your display name"}
                     </p>
-                    <p className="truncate text-sm text-muted-foreground">/profile/{profile.username}</p>
+                    <p className="truncate text-sm text-muted-foreground">
+                      /profile/{profile.username}
+                    </p>
                     {roles && roles.length > 0 ? (
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {roles.map((role) => (
@@ -155,14 +160,16 @@ function DashboardPage() {
               <CardHeader>
                 <CardTitle className="font-display text-xl">Profile completion</CardTitle>
                 <CardDescription>
-                  {completion.completed} of {completion.total} details added. Everything here is optional.
+                  {completion.completed} of {completion.total} details added. Everything here is
+                  optional.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Progress value={completion.percent} aria-label="Profile completion" />
                 {completion.missing.length > 0 ? (
                   <p className="text-sm text-muted-foreground">
-                    Still to add: {completion.missing.map((f) => PROFILE_FIELD_LABELS[f] ?? f).join(", ")}.
+                    Still to add:{" "}
+                    {completion.missing.map((f) => PROFILE_FIELD_LABELS[f] ?? f).join(", ")}.
                   </p>
                 ) : (
                   <p className="text-sm text-muted-foreground">Your profile is complete.</p>

@@ -29,9 +29,11 @@ import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
 import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
 import { Route as OrganizationsSlugRouteImport } from './routes/organizations.$slug'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
+import { Route as AuthenticatedSettingsBookingsRouteImport } from './routes/_authenticated/settings.bookings'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
 import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
+import { Route as AuthenticatedSettingsCreatorBookingsRouteImport } from './routes/_authenticated/settings.creator_.bookings'
 import { Route as AuthenticatedSettingsCreatorPortfolioRouteImport } from './routes/_authenticated/settings.creator_.portfolio'
 import { Route as AuthenticatedSettingsCreatorServicesRouteImport } from './routes/_authenticated/settings.creator_.services'
 
@@ -134,6 +136,12 @@ const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   path: '/profile/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsBookingsRoute =
+  AuthenticatedSettingsBookingsRouteImport.update({
+    id: '/settings/bookings',
+    path: '/settings/bookings',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsCreatorRoute =
   AuthenticatedSettingsCreatorRouteImport.update({
     id: '/settings/creator',
@@ -150,6 +158,12 @@ const AuthenticatedSettingsProfileRoute =
   AuthenticatedSettingsProfileRouteImport.update({
     id: '/settings/profile',
     path: '/settings/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsCreatorBookingsRoute =
+  AuthenticatedSettingsCreatorBookingsRouteImport.update({
+    id: '/settings/creator_/bookings',
+    path: '/settings/creator/bookings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSettingsCreatorPortfolioRoute =
@@ -185,9 +199,11 @@ export interface FileRoutesByFullPath {
   '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
+  '/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/creator/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
@@ -210,9 +226,11 @@ export interface FileRoutesByTo {
   '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators': typeof CreatorsIndexRoute
+  '/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/creator/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
@@ -238,9 +256,11 @@ export interface FileRoutesById {
   '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
+  '/_authenticated/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/_authenticated/settings/creator_/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/_authenticated/settings/creator_/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/_authenticated/settings/creator_/services': typeof AuthenticatedSettingsCreatorServicesRoute
 }
@@ -266,9 +286,11 @@ export interface FileRouteTypes {
     | '/organizations/$slug'
     | '/profile/$username'
     | '/creators/'
+    | '/settings/bookings'
     | '/settings/creator'
     | '/settings/organization'
     | '/settings/profile'
+    | '/settings/creator/bookings'
     | '/settings/creator/portfolio'
     | '/settings/creator/services'
   fileRoutesByTo: FileRoutesByTo
@@ -291,9 +313,11 @@ export interface FileRouteTypes {
     | '/organizations/$slug'
     | '/profile/$username'
     | '/creators'
+    | '/settings/bookings'
     | '/settings/creator'
     | '/settings/organization'
     | '/settings/profile'
+    | '/settings/creator/bookings'
     | '/settings/creator/portfolio'
     | '/settings/creator/services'
   id:
@@ -318,9 +342,11 @@ export interface FileRouteTypes {
     | '/organizations/$slug'
     | '/profile/$username'
     | '/creators/'
+    | '/_authenticated/settings/bookings'
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/organization'
     | '/_authenticated/settings/profile'
+    | '/_authenticated/settings/creator_/bookings'
     | '/_authenticated/settings/creator_/portfolio'
     | '/_authenticated/settings/creator_/services'
   fileRoutesById: FileRoutesById
@@ -486,6 +512,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings/bookings': {
+      id: '/_authenticated/settings/bookings'
+      path: '/settings/bookings'
+      fullPath: '/settings/bookings'
+      preLoaderRoute: typeof AuthenticatedSettingsBookingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/creator': {
       id: '/_authenticated/settings/creator'
       path: '/settings/creator'
@@ -507,6 +540,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/creator_/bookings': {
+      id: '/_authenticated/settings/creator_/bookings'
+      path: '/settings/creator/bookings'
+      fullPath: '/settings/creator/bookings'
+      preLoaderRoute: typeof AuthenticatedSettingsCreatorBookingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/creator_/portfolio': {
       id: '/_authenticated/settings/creator_/portfolio'
       path: '/settings/creator/portfolio'
@@ -526,19 +566,24 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSettingsBookingsRoute: typeof AuthenticatedSettingsBookingsRoute
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
+  AuthenticatedSettingsCreatorBookingsRoute: typeof AuthenticatedSettingsCreatorBookingsRoute
   AuthenticatedSettingsCreatorPortfolioRoute: typeof AuthenticatedSettingsCreatorPortfolioRoute
   AuthenticatedSettingsCreatorServicesRoute: typeof AuthenticatedSettingsCreatorServicesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSettingsBookingsRoute: AuthenticatedSettingsBookingsRoute,
   AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsOrganizationRoute:
     AuthenticatedSettingsOrganizationRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
+  AuthenticatedSettingsCreatorBookingsRoute:
+    AuthenticatedSettingsCreatorBookingsRoute,
   AuthenticatedSettingsCreatorPortfolioRoute:
     AuthenticatedSettingsCreatorPortfolioRoute,
   AuthenticatedSettingsCreatorServicesRoute:

@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useState } from "react";
 import { Clock, Globe, MapPin } from "lucide-react";
+import { toast } from "sonner";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +14,19 @@ import type { PublicPortfolioItem } from "@/lib/portfolio";
 import { formatServicePrice, formatTurnaround, type PublicServiceItem } from "@/lib/service";
 
 import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
+import { BookingRequestForm } from "@/components/bookings/booking-request-form";
 import { initialsFrom } from "@/lib/profile";
+import { useAuth } from "@/hooks/use-auth";
+import { useProfile } from "@/hooks/use-profile";
+import { useCreateBooking } from "@/hooks/use-bookings";
+import { bookingErrorMessage } from "@/lib/booking";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import {
   AVAILABILITY_LABELS,
@@ -102,6 +116,11 @@ function PublicCreatorPage() {
   };
 
   const creator = profile.creator;
+  const { user } = useAuth();
+  const profileQuery = useProfile();
+  const createBooking = useCreateBooking();
+  const [bookingService, setBookingService] = useState<PublicServiceItem | null>(null);
+  const [bookingError, setBookingError] = useState<string | null>(null);
   const name = creatorDisplayName(creator.creator_name, profile.display_name, profile.username);
   const location = creator.location ?? profile.profile_location;
   const website = creator.website ?? profile.profile_website;
@@ -109,6 +128,20 @@ function PublicCreatorPage() {
     label: platform.label,
     href: creator.links?.[platform.key as LinkPlatform],
   })).filter((link) => Boolean(link.href)) as { label: string; href: string }[];
+  const isOwner = Boolean(user && profileQuery.data?.username === profile.username);
+  const canRequest = Boolean(user && profileQuery.data && !isOwner);
+
+  async function submitBooking(message: string) {
+    if (!bookingService) return;
+    setBookingError(null);
+    try {
+      await createBooking.mutateAsync({ serviceId: bookingService.id, message });
+      setBookingService(null);
+      toast.success("Booking request sent.");
+    } catch (error) {
+      setBookingError(bookingErrorMessage(error instanceof Error ? error.message : undefined));
+    }
+  }
 
   return (
     <SiteLayout>
@@ -176,9 +209,7 @@ function PublicCreatorPage() {
               <div className="space-y-2">
                 <h2 className="text-sm font-medium">Disciplines</h2>
                 <div className="flex flex-wrap gap-2">
-                  {creator.primary_category ? (
-                    <Badge>{creator.primary_category.name}</Badge>
-                  ) : null}
+                  {creator.primary_category ? <Badge>{creator.primary_category.name}</Badge> : null}
                   {creator.categories.map((category) => (
                     <Badge key={category.slug} variant="secondary">
                       {category.name}
@@ -287,6 +318,17 @@ function PublicCreatorPage() {
                         <span className="font-display text-base font-semibold text-foreground">
                           {priceText}
                         </span>
+                        {canRequest ? (
+                          <Button size="sm" onClick={() => setBookingService(service)}>
+                            Request service
+                          </Button>
+                        ) : !user ? (
+                          <Link to="/login" search={{ redirect: `/creators/${profile.username}` }}>
+                            <Button size="sm" variant="outline">
+                              Log in to request
+                            </Button>
+                          </Link>
+                        ) : null}
                       </div>
                     </div>
                   );
@@ -295,8 +337,34 @@ function PublicCreatorPage() {
             </CardContent>
           </Card>
         ) : null}
-
       </div>
+      <Dialog
+        open={bookingService !== null}
+        onOpenChange={(open) => {
+          if (!open && !createBooking.isPending) {
+            setBookingService(null);
+            setBookingError(null);
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Request this service</DialogTitle>
+            <DialogDescription>
+              The creator will review your request and update its status.
+            </DialogDescription>
+          </DialogHeader>
+          {bookingService ? (
+            <BookingRequestForm
+              serviceTitle={bookingService.title}
+              saving={createBooking.isPending}
+              formError={bookingError}
+              onCancel={() => setBookingService(null)}
+              onSubmit={(message) => void submitBooking(message)}
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </SiteLayout>
   );
 }
