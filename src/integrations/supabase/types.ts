@@ -65,57 +65,6 @@ export type Database = {
         }
         Relationships: []
       }
-      organizations: {
-        Row: {
-          created_at: string
-          description: string | null
-          id: string
-          links: Json
-          location: string | null
-          logo_path: string | null
-          name: string
-          organization_type: string
-          owner_id: string
-          short_description: string
-          slug: string
-          updated_at: string
-          visibility: Database["public"]["Enums"]["organization_visibility"]
-          website: string | null
-        }
-        Insert: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          links?: Json
-          location?: string | null
-          logo_path?: string | null
-          name: string
-          organization_type: string
-          owner_id: string
-          short_description?: string
-          slug: string
-          updated_at?: string
-          visibility?: Database["public"]["Enums"]["organization_visibility"]
-          website?: string | null
-        }
-        Update: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          links?: Json
-          location?: string | null
-          logo_path?: string | null
-          name?: string
-          organization_type?: string
-          owner_id?: string
-          short_description?: string
-          slug?: string
-          updated_at?: string
-          visibility?: Database["public"]["Enums"]["organization_visibility"]
-          website?: string | null
-        }
-        Relationships: []
-      }
       creator_profile_categories: {
         Row: {
           category_id: string
@@ -243,6 +192,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          links: Json
+          location: string | null
+          logo_path: string | null
+          name: string
+          organization_type: string
+          owner_id: string
+          short_description: string
+          slug: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["organization_visibility"]
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          links?: Json
+          location?: string | null
+          logo_path?: string | null
+          name: string
+          organization_type: string
+          owner_id: string
+          short_description?: string
+          slug: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["organization_visibility"]
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          links?: Json
+          location?: string | null
+          logo_path?: string | null
+          name?: string
+          organization_type?: string
+          owner_id?: string
+          short_description?: string
+          slug?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["organization_visibility"]
+          website?: string | null
+        }
+        Relationships: []
       }
       portfolio_categories: {
         Row: {
@@ -484,7 +484,6 @@ export type Database = {
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
       get_public_organization: { Args: { _slug: string }; Returns: Json }
       get_public_portfolio: { Args: { _username: string }; Returns: Json }
-      get_public_services: { Args: { _username: string }; Returns: Json }
       get_public_profile: {
         Args: { _username: string }
         Returns: {
