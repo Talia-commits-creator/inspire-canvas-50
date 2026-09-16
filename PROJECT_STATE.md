@@ -4,8 +4,9 @@
 
 - Completed: Phases 1-9, including authentication, profiles, Creator Profiles, Portfolio, Services, and Organization Foundation.
 - Completed locally: Phase 10 - Booking Foundation.
-- Current phase: Phase 11 - Payments.
-- Next phase: Phase 12 - Collaboration.
+- Completed locally: Phase 11 - Payments Foundation.
+- Current phase: Phase 12 - Collaboration Foundation.
+- Next phase: Phase 13 - Community.
 
 ## Booking Foundation
 
@@ -51,6 +52,22 @@ Not implemented or verified:
 - Payment webhooks.
 - Real payment processing, refunds, invoices, or escrow.
 - Provider credentials and live payment verification.
+
+## Collaboration Foundation
+
+Implemented locally:
+
+- Collaboration records with draft, active, completed, and cancelled lifecycle states.
+- Participant records with owner, creator, client, and organization roles.
+- Accepted booking to collaboration creation flow.
+- Participant-only authenticated collaboration list at `/settings/collaborations`.
+- Supabase migration: `20260916020000_collaboration_foundation.sql`.
+
+Not implemented or verified:
+
+- Messaging or chat.
+- Reviews, ratings, scheduling, or notifications.
+- Live database migration or generated type verification.
 
 ## Required Before Applying Booking
 

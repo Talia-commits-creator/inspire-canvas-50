@@ -14,11 +14,13 @@ export function BookingCard({
   mode,
   busy,
   onDecision,
+  onStartCollaboration,
 }: {
   booking: Booking;
   mode: "requester" | "creator";
   busy?: boolean;
   onDecision?: (status: "accepted" | "rejected") => void;
+  onStartCollaboration?: () => void;
 }) {
   return (
     <li className="rounded-xl border border-border bg-card p-5">
@@ -42,6 +44,14 @@ export function BookingCard({
       <p className="mt-4 text-xs text-muted-foreground">
         Requested {new Date(booking.created_at).toLocaleDateString()}
       </p>
+
+      {booking.status === "accepted" && onStartCollaboration ? (
+        <div className="mt-5 border-t border-border pt-4">
+          <Button variant="outline" disabled={busy} onClick={onStartCollaboration}>
+            Start collaboration
+          </Button>
+        </div>
+      ) : null}
 
       {mode === "creator" && booking.status === "pending" && onDecision ? (
         <div className="mt-5 flex flex-col gap-2 border-t border-border pt-4 sm:flex-row">

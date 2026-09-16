@@ -61,6 +61,9 @@ function DashboardPage() {
             <Link to="/settings/bookings">
               <Button variant="outline">My bookings</Button>
             </Link>
+            <Link to="/settings/collaborations">
+              <Button variant="outline">Collaborations</Button>
+            </Link>
             <Button variant="outline" onClick={handleSignOut} disabled={signingOut}>
               {signingOut ? "Logging out…" : "Log out"}
             </Button>
