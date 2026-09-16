@@ -31,6 +31,7 @@ import { Route as OrganizationsSlugRouteImport } from './routes/organizations.$s
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as AuthenticatedSettingsBookingsRouteImport } from './routes/_authenticated/settings.bookings'
 import { Route as AuthenticatedSettingsCollaborationsRouteImport } from './routes/_authenticated/settings.collaborations'
+import { Route as AuthenticatedSettingsCommunityRouteImport } from './routes/_authenticated/settings.community'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
 import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
@@ -149,6 +150,12 @@ const AuthenticatedSettingsCollaborationsRoute =
     path: '/settings/collaborations',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsCommunityRoute =
+  AuthenticatedSettingsCommunityRouteImport.update({
+    id: '/settings/community',
+    path: '/settings/community',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsCreatorRoute =
   AuthenticatedSettingsCreatorRouteImport.update({
     id: '/settings/creator',
@@ -208,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/creators/': typeof CreatorsIndexRoute
   '/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/settings/collaborations': typeof AuthenticatedSettingsCollaborationsRoute
+  '/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
@@ -236,6 +244,7 @@ export interface FileRoutesByTo {
   '/creators': typeof CreatorsIndexRoute
   '/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/settings/collaborations': typeof AuthenticatedSettingsCollaborationsRoute
+  '/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
@@ -267,6 +276,7 @@ export interface FileRoutesById {
   '/creators/': typeof CreatorsIndexRoute
   '/_authenticated/settings/bookings': typeof AuthenticatedSettingsBookingsRoute
   '/_authenticated/settings/collaborations': typeof AuthenticatedSettingsCollaborationsRoute
+  '/_authenticated/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
@@ -298,6 +308,7 @@ export interface FileRouteTypes {
     | '/creators/'
     | '/settings/bookings'
     | '/settings/collaborations'
+    | '/settings/community'
     | '/settings/creator'
     | '/settings/organization'
     | '/settings/profile'
@@ -326,6 +337,7 @@ export interface FileRouteTypes {
     | '/creators'
     | '/settings/bookings'
     | '/settings/collaborations'
+    | '/settings/community'
     | '/settings/creator'
     | '/settings/organization'
     | '/settings/profile'
@@ -356,6 +368,7 @@ export interface FileRouteTypes {
     | '/creators/'
     | '/_authenticated/settings/bookings'
     | '/_authenticated/settings/collaborations'
+    | '/_authenticated/settings/community'
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/organization'
     | '/_authenticated/settings/profile'
@@ -539,6 +552,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsCollaborationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/community': {
+      id: '/_authenticated/settings/community'
+      path: '/settings/community'
+      fullPath: '/settings/community'
+      preLoaderRoute: typeof AuthenticatedSettingsCommunityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/creator': {
       id: '/_authenticated/settings/creator'
       path: '/settings/creator'
@@ -588,6 +608,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedSettingsBookingsRoute: typeof AuthenticatedSettingsBookingsRoute
   AuthenticatedSettingsCollaborationsRoute: typeof AuthenticatedSettingsCollaborationsRoute
+  AuthenticatedSettingsCommunityRoute: typeof AuthenticatedSettingsCommunityRoute
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
@@ -601,6 +622,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsBookingsRoute: AuthenticatedSettingsBookingsRoute,
   AuthenticatedSettingsCollaborationsRoute:
     AuthenticatedSettingsCollaborationsRoute,
+  AuthenticatedSettingsCommunityRoute: AuthenticatedSettingsCommunityRoute,
   AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsOrganizationRoute:
     AuthenticatedSettingsOrganizationRoute,

@@ -5,8 +5,9 @@
 - Completed: Phases 1-9, including authentication, profiles, Creator Profiles, Portfolio, Services, and Organization Foundation.
 - Completed locally: Phase 10 - Booking Foundation.
 - Completed locally: Phase 11 - Payments Foundation.
-- Current phase: Phase 12 - Collaboration Foundation.
-- Next phase: Phase 13 - Community.
+- Completed locally: Phase 12 - Collaboration Foundation.
+- Current phase: Phase 13 - Community Foundation.
+- Next phase: Phase 14 - Admin.
 
 ## Booking Foundation
 
@@ -67,6 +68,21 @@ Not implemented or verified:
 
 - Messaging or chat.
 - Reviews, ratings, scheduling, or notifications.
+- Live database migration or generated type verification.
+
+## Community Foundation
+
+Implemented locally:
+
+- Public feed of published public community posts.
+- Authenticated author management at `/settings/community`.
+- Create, edit, delete, draft, publish, archive, and public/private visibility controls.
+- Database-authoritative author ownership and lifecycle transition enforcement.
+- Supabase migration: `20260916030000_community_foundation.sql`.
+
+Not implemented or verified:
+
+- Likes, reactions, comments, follows, recommendations, notifications, chat, or realtime updates.
 - Live database migration or generated type verification.
 
 ## Required Before Applying Booking
