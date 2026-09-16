@@ -6,8 +6,9 @@
 - Completed locally: Phase 10 - Booking Foundation.
 - Completed locally: Phase 11 - Payments Foundation.
 - Completed locally: Phase 12 - Collaboration Foundation.
-- Current phase: Phase 13 - Community Foundation.
-- Next phase: Phase 14 - Admin.
+- Completed locally: Phase 13 - Community Foundation.
+- Current phase: Phase 14 - Admin Foundation.
+- Next phase: Phase 15 - Media.
 
 ## Booking Foundation
 
@@ -69,6 +70,21 @@ Not implemented or verified:
 - Messaging or chat.
 - Reviews, ratings, scheduling, or notifications.
 - Live database migration or generated type verification.
+
+## Admin Foundation
+
+Implemented locally:
+
+- Database-authoritative `is_admin()` role check using the existing `user_roles` table.
+- Admin-only aggregate overview RPC with no private record exposure.
+- Authenticated `/admin` route with explicit access-denied behavior.
+- Dashboard admin link shown only as a presentation convenience for users with the existing admin role.
+- Supabase migration: `20260916040000_admin_foundation.sql`.
+
+Not implemented or verified:
+
+- Entity mutation, moderation, billing, impersonation, bulk deletion, or deployment controls.
+- Live database authorization behavior or generated type verification.
 
 ## Community Foundation
 

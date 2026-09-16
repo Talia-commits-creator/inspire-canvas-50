@@ -67,6 +67,11 @@ function DashboardPage() {
             <Link to="/settings/community">
               <Button variant="outline">My community posts</Button>
             </Link>
+            {roles?.includes("admin") ? (
+              <Link to="/admin">
+                <Button variant="outline">Admin</Button>
+              </Link>
+            ) : null}
             <Button variant="outline" onClick={handleSignOut} disabled={signingOut}>
               {signingOut ? "Logging out…" : "Log out"}
             </Button>
