@@ -27,8 +27,10 @@ import { Route as StyleguideRouteImport } from './routes/styleguide'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
 import { Route as CreatorsUsernameRouteImport } from './routes/creators.$username'
+import { Route as OrganizationsSlugRouteImport } from './routes/organizations.$slug'
 import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
+import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
 import { Route as AuthenticatedSettingsCreatorPortfolioRouteImport } from './routes/_authenticated/settings.creator_.portfolio'
 import { Route as AuthenticatedSettingsCreatorServicesRouteImport } from './routes/_authenticated/settings.creator_.services'
@@ -122,6 +124,11 @@ const CreatorsUsernameRoute = CreatorsUsernameRouteImport.update({
   path: '/$username',
   getParentRoute: () => CreatorsRoute,
 } as any)
+const OrganizationsSlugRoute = OrganizationsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => OrganizationsRoute,
+} as any)
 const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
   id: '/profile/$username',
   path: '/profile/$username',
@@ -131,6 +138,12 @@ const AuthenticatedSettingsCreatorRoute =
   AuthenticatedSettingsCreatorRouteImport.update({
     id: '/settings/creator',
     path: '/settings/creator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsOrganizationRoute =
+  AuthenticatedSettingsOrganizationRouteImport.update({
+    id: '/settings/organization',
+    path: '/settings/organization',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSettingsProfileRoute =
@@ -161,7 +174,7 @@ export interface FileRoutesByFullPath {
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/organizations': typeof OrganizationsRoute
+  '/organizations': typeof OrganizationsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -169,9 +182,11 @@ export interface FileRoutesByFullPath {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/creators/$username': typeof CreatorsUsernameRoute
+  '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
+  '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
@@ -184,7 +199,7 @@ export interface FileRoutesByTo {
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/organizations': typeof OrganizationsRoute
+  '/organizations': typeof OrganizationsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -192,9 +207,11 @@ export interface FileRoutesByTo {
   '/styleguide': typeof StyleguideRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/creators/$username': typeof CreatorsUsernameRoute
+  '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators': typeof CreatorsIndexRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
+  '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/settings/creator/services': typeof AuthenticatedSettingsCreatorServicesRoute
@@ -210,7 +227,7 @@ export interface FileRoutesById {
   '/discover': typeof DiscoverRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/organizations': typeof OrganizationsRoute
+  '/organizations': typeof OrganizationsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -218,9 +235,11 @@ export interface FileRoutesById {
   '/styleguide': typeof StyleguideRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/creators/$username': typeof CreatorsUsernameRoute
+  '/organizations/$slug': typeof OrganizationsSlugRoute
   '/profile/$username': typeof ProfileUsernameRoute
   '/creators/': typeof CreatorsIndexRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
+  '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/_authenticated/settings/creator_/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
   '/_authenticated/settings/creator_/services': typeof AuthenticatedSettingsCreatorServicesRoute
@@ -244,9 +263,11 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/creators/$username'
+    | '/organizations/$slug'
     | '/profile/$username'
     | '/creators/'
     | '/settings/creator'
+    | '/settings/organization'
     | '/settings/profile'
     | '/settings/creator/portfolio'
     | '/settings/creator/services'
@@ -267,9 +288,11 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/dashboard'
     | '/creators/$username'
+    | '/organizations/$slug'
     | '/profile/$username'
     | '/creators'
     | '/settings/creator'
+    | '/settings/organization'
     | '/settings/profile'
     | '/settings/creator/portfolio'
     | '/settings/creator/services'
@@ -292,9 +315,11 @@ export interface FileRouteTypes {
     | '/styleguide'
     | '/_authenticated/dashboard'
     | '/creators/$username'
+    | '/organizations/$slug'
     | '/profile/$username'
     | '/creators/'
     | '/_authenticated/settings/creator'
+    | '/_authenticated/settings/organization'
     | '/_authenticated/settings/profile'
     | '/_authenticated/settings/creator_/portfolio'
     | '/_authenticated/settings/creator_/services'
@@ -310,7 +335,7 @@ export interface RootRouteChildren {
   DiscoverRoute: typeof DiscoverRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
-  OrganizationsRoute: typeof OrganizationsRoute
+  OrganizationsRoute: typeof OrganizationsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -447,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreatorsUsernameRouteImport
       parentRoute: typeof CreatorsRoute
     }
+    '/organizations/$slug': {
+      id: '/organizations/$slug'
+      path: '/$slug'
+      fullPath: '/organizations/$slug'
+      preLoaderRoute: typeof OrganizationsSlugRouteImport
+      parentRoute: typeof OrganizationsRoute
+    }
     '/profile/$username': {
       id: '/profile/$username'
       path: '/profile/$username'
@@ -459,6 +491,13 @@ declare module '@tanstack/react-router' {
       path: '/settings/creator'
       fullPath: '/settings/creator'
       preLoaderRoute: typeof AuthenticatedSettingsCreatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/organization': {
+      id: '/_authenticated/settings/organization'
+      path: '/settings/organization'
+      fullPath: '/settings/organization'
+      preLoaderRoute: typeof AuthenticatedSettingsOrganizationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings/profile': {
@@ -488,6 +527,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
+  AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
   AuthenticatedSettingsCreatorPortfolioRoute: typeof AuthenticatedSettingsCreatorPortfolioRoute
   AuthenticatedSettingsCreatorServicesRoute: typeof AuthenticatedSettingsCreatorServicesRoute
@@ -496,6 +536,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
+  AuthenticatedSettingsOrganizationRoute:
+    AuthenticatedSettingsOrganizationRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
   AuthenticatedSettingsCreatorPortfolioRoute:
     AuthenticatedSettingsCreatorPortfolioRoute,
@@ -520,6 +562,18 @@ const CreatorsRouteWithChildren = CreatorsRoute._addFileChildren(
   CreatorsRouteChildren,
 )
 
+interface OrganizationsRouteChildren {
+  OrganizationsSlugRoute: typeof OrganizationsSlugRoute
+}
+
+const OrganizationsRouteChildren: OrganizationsRouteChildren = {
+  OrganizationsSlugRoute: OrganizationsSlugRoute,
+}
+
+const OrganizationsRouteWithChildren = OrganizationsRoute._addFileChildren(
+  OrganizationsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -530,7 +584,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiscoverRoute: DiscoverRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
-  OrganizationsRoute: OrganizationsRoute,
+  OrganizationsRoute: OrganizationsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,

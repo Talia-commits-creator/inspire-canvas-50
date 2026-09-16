@@ -112,7 +112,9 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ThemeProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
@@ -138,14 +140,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
-          <TooltipProvider delayDuration={200}>
-            <Outlet />
-            <Toaster position="bottom-right" />
-          </TooltipProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <TooltipProvider delayDuration={200}>
+        <Outlet />
+        <Toaster position="bottom-right" />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
