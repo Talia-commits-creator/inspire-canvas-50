@@ -7,10 +7,10 @@
 - Completed locally: Phase 11 - Payments Foundation.
 - Completed locally: Phase 12 - Collaboration Foundation.
 - Completed locally: Phase 13 - Community Foundation.
-- Current phase: Phase 14 - Admin Foundation.
 - Completed locally: Phase 14 - Admin Foundation.
-- Current phase: Phase 15 - Media Foundation.
-- Next phase: Phase 16 - Premium.
+- Completed locally: Phase 15 - Media Foundation.
+- Completed locally: Phase 16 - Premium.
+- Next phase: Phase 17 - Polish & Launch Readiness.
 
 ## Booking Foundation
 
@@ -117,6 +117,26 @@ Not implemented or verified:
 
 - Likes, reactions, comments, follows, recommendations, notifications, chat, or realtime updates.
 - Live database migration or generated type verification.
+
+## Premium Foundation
+
+Implemented locally:
+
+- Subscription plans schema (`subscription_plans`), plan entitlements (`plan_entitlements`), and user/organization subscriptions (`subscriptions`).
+- Database-authoritative feature gating with `has_user_entitlement` and `has_organization_entitlement` RPCs, plus `get_my_active_subscription`.
+- Default plan seed data: Free Community (user, 0 EUR), Creator Pro (user, 12 EUR/mo), and Organization Partner (organization, 49 EUR/mo).
+- Provider-agnostic billing contract in `src/lib/premium-provider.ts` returning an explicit unconfigured state without requiring secrets.
+- Reusable entitlement hooks (`useEntitlement`, `useMySubscription`, `useSubscriptionPlans`) with structural adapter and graceful fallbacks.
+- UI feature gating components: `PlanCard`, `PremiumBadge`, `PremiumGate`, and `UpgradePrompt`.
+- Public pricing and plan comparison page at `/pricing`.
+- Authenticated subscription and entitlement settings page at `/settings/plans`.
+- Tier capability indicators integrated into dashboard, Creator Services, and Creator Portfolio.
+- Supabase migration: `20260916060000_premium_foundation.sql`.
+
+Not implemented or verified:
+
+- Live billing provider credentials, webhook processing, customer portal, invoices, or real credit card checkout.
+- Live database migration or remote generated type regeneration (pending target Supabase project access).
 
 ## Required Before Applying Booking
 

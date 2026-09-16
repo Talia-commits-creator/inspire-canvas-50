@@ -43,6 +43,8 @@ import {
   useUpdatePortfolioItem,
 } from "@/hooks/use-portfolio";
 import { useAuth } from "@/hooks/use-auth";
+import { useMySubscription } from "@/hooks/use-premium";
+import { UpgradePrompt } from "@/components/premium/upgrade-prompt";
 import { PORTFOLIO_LIMITS, portfolioErrorMessage, type PortfolioItem } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/_authenticated/settings/creator_/portfolio")({
@@ -66,9 +68,12 @@ function PortfolioSettingsPage() {
   const creatorProfileId = creatorQuery.data?.profile.id;
   const categoriesQuery = usePortfolioCategories();
   const portfolioQuery = useMyPortfolio(creatorProfileId);
+  const mySubQuery = useMySubscription();
   const save = useSavePortfolioItem(creatorProfileId);
   const update = useUpdatePortfolioItem(creatorProfileId);
   const remove = useDeletePortfolioItem(creatorProfileId);
+
+  const isPro = mySubQuery.data?.plan.slug === "creator_pro";
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<PortfolioItem | null>(null);
@@ -97,7 +102,11 @@ function PortfolioSettingsPage() {
     setDialogOpen(true);
   }
 
-  async function handleSubmit({ values: formValues, mediaFile, coverFile }: PortfolioSubmitPayload) {
+  async function handleSubmit({
+    values: formValues,
+    mediaFile,
+    coverFile,
+  }: PortfolioSubmitPayload) {
     if (!user || !creatorProfileId) return;
     setFormError(null);
 
@@ -245,14 +254,23 @@ function PortfolioSettingsPage() {
           />
         ) : (
           <>
-            <p className="text-sm text-muted-foreground">
-              {items.length} of {PORTFOLIO_LIMITS.items.max} pieces · {featuredCount} of{" "}
-              {PORTFOLIO_LIMITS.featured.max} featured
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p className="text-sm text-muted-foreground">
+                {items.length} of {isPro ? 60 : PORTFOLIO_LIMITS.items.max} pieces · {featuredCount}{" "}
+                of {PORTFOLIO_LIMITS.featured.max} featured
+              </p>
+            </div>
+            {!isPro ? (
+              <UpgradePrompt
+                compact
+                feature="Creator Pro unlocks up to 60 portfolio pieces, verified presence, and priority discovery."
+              />
+            ) : null}
             {atItemLimit ? (
               <Alert>
                 <AlertDescription>
-                  You've reached the {PORTFOLIO_LIMITS.items.max} item limit. Delete something to add more.
+                  You've reached the {PORTFOLIO_LIMITS.items.max} item limit. Delete something to
+                  add more.
                 </AlertDescription>
               </Alert>
             ) : null}

@@ -20,6 +20,7 @@ import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OrganizationsRouteImport } from './routes/organizations'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -35,6 +36,7 @@ import { Route as AuthenticatedSettingsCollaborationsRouteImport } from './route
 import { Route as AuthenticatedSettingsCommunityRouteImport } from './routes/_authenticated/settings.community'
 import { Route as AuthenticatedSettingsCreatorRouteImport } from './routes/_authenticated/settings.creator'
 import { Route as AuthenticatedSettingsOrganizationRouteImport } from './routes/_authenticated/settings.organization'
+import { Route as AuthenticatedSettingsPlansRouteImport } from './routes/_authenticated/settings.plans'
 import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings.profile'
 import { Route as AuthenticatedSettingsCreatorBookingsRouteImport } from './routes/_authenticated/settings.creator_.bookings'
 import { Route as AuthenticatedSettingsCreatorPortfolioRouteImport } from './routes/_authenticated/settings.creator_.portfolio'
@@ -92,6 +94,11 @@ const LoginRoute = LoginRouteImport.update({
 const OrganizationsRoute = OrganizationsRouteImport.update({
   id: '/organizations',
   path: '/organizations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -174,6 +181,12 @@ const AuthenticatedSettingsOrganizationRoute =
     path: '/settings/organization',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsPlansRoute =
+  AuthenticatedSettingsPlansRouteImport.update({
+    id: '/settings/plans',
+    path: '/settings/plans',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsProfileRoute =
   AuthenticatedSettingsProfileRouteImport.update({
     id: '/settings/profile',
@@ -210,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRouteWithChildren
+  '/pricing': typeof PricingRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -225,6 +239,7 @@ export interface FileRoutesByFullPath {
   '/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
+  '/settings/plans': typeof AuthenticatedSettingsPlansRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
@@ -240,6 +255,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRouteWithChildren
+  '/pricing': typeof PricingRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -255,6 +271,7 @@ export interface FileRoutesByTo {
   '/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
+  '/settings/plans': typeof AuthenticatedSettingsPlansRoute
   '/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/settings/creator/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/settings/creator/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
@@ -273,6 +290,7 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/organizations': typeof OrganizationsRouteWithChildren
+  '/pricing': typeof PricingRoute
   '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -288,6 +306,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/community': typeof AuthenticatedSettingsCommunityRoute
   '/_authenticated/settings/creator': typeof AuthenticatedSettingsCreatorRoute
   '/_authenticated/settings/organization': typeof AuthenticatedSettingsOrganizationRoute
+  '/_authenticated/settings/plans': typeof AuthenticatedSettingsPlansRoute
   '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
   '/_authenticated/settings/creator_/bookings': typeof AuthenticatedSettingsCreatorBookingsRoute
   '/_authenticated/settings/creator_/portfolio': typeof AuthenticatedSettingsCreatorPortfolioRoute
@@ -306,6 +325,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/organizations'
+    | '/pricing'
     | '/projects'
     | '/register'
     | '/reset-password'
@@ -321,6 +341,7 @@ export interface FileRouteTypes {
     | '/settings/community'
     | '/settings/creator'
     | '/settings/organization'
+    | '/settings/plans'
     | '/settings/profile'
     | '/settings/creator/bookings'
     | '/settings/creator/portfolio'
@@ -336,6 +357,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/organizations'
+    | '/pricing'
     | '/projects'
     | '/register'
     | '/reset-password'
@@ -351,6 +373,7 @@ export interface FileRouteTypes {
     | '/settings/community'
     | '/settings/creator'
     | '/settings/organization'
+    | '/settings/plans'
     | '/settings/profile'
     | '/settings/creator/bookings'
     | '/settings/creator/portfolio'
@@ -368,6 +391,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/organizations'
+    | '/pricing'
     | '/projects'
     | '/register'
     | '/reset-password'
@@ -383,6 +407,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/community'
     | '/_authenticated/settings/creator'
     | '/_authenticated/settings/organization'
+    | '/_authenticated/settings/plans'
     | '/_authenticated/settings/profile'
     | '/_authenticated/settings/creator_/bookings'
     | '/_authenticated/settings/creator_/portfolio'
@@ -401,6 +426,7 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   OrganizationsRoute: typeof OrganizationsRouteWithChildren
+  PricingRoute: typeof PricingRoute
   ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -486,6 +512,13 @@ declare module '@tanstack/react-router' {
       path: '/organizations'
       fullPath: '/organizations'
       preLoaderRoute: typeof OrganizationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -593,6 +626,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsOrganizationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/plans': {
+      id: '/_authenticated/settings/plans'
+      path: '/settings/plans'
+      fullPath: '/settings/plans'
+      preLoaderRoute: typeof AuthenticatedSettingsPlansRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/profile': {
       id: '/_authenticated/settings/profile'
       path: '/settings/profile'
@@ -631,6 +671,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsCommunityRoute: typeof AuthenticatedSettingsCommunityRoute
   AuthenticatedSettingsCreatorRoute: typeof AuthenticatedSettingsCreatorRoute
   AuthenticatedSettingsOrganizationRoute: typeof AuthenticatedSettingsOrganizationRoute
+  AuthenticatedSettingsPlansRoute: typeof AuthenticatedSettingsPlansRoute
   AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
   AuthenticatedSettingsCreatorBookingsRoute: typeof AuthenticatedSettingsCreatorBookingsRoute
   AuthenticatedSettingsCreatorPortfolioRoute: typeof AuthenticatedSettingsCreatorPortfolioRoute
@@ -646,6 +687,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsCreatorRoute: AuthenticatedSettingsCreatorRoute,
   AuthenticatedSettingsOrganizationRoute:
     AuthenticatedSettingsOrganizationRoute,
+  AuthenticatedSettingsPlansRoute: AuthenticatedSettingsPlansRoute,
   AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
   AuthenticatedSettingsCreatorBookingsRoute:
     AuthenticatedSettingsCreatorBookingsRoute,
@@ -696,6 +738,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   OrganizationsRoute: OrganizationsRouteWithChildren,
+  PricingRoute: PricingRoute,
   ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,

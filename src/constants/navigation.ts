@@ -32,6 +32,7 @@ export const FOOTER_GROUPS = [
       { to: "/creators", label: "Creators" },
       { to: "/organizations", label: "Organizations" },
       { to: "/projects", label: "Projects" },
+      { to: "/pricing", label: "Plans & Pricing" },
     ],
   },
   {

@@ -39,11 +39,9 @@ import {
   useUpdateService,
 } from "@/hooks/use-services";
 import { useAuth } from "@/hooks/use-auth";
-import {
-  SERVICE_LIMITS,
-  serviceErrorMessage,
-  type Service,
-} from "@/lib/service";
+import { useMySubscription } from "@/hooks/use-premium";
+import { UpgradePrompt } from "@/components/premium/upgrade-prompt";
+import { SERVICE_LIMITS, serviceErrorMessage, type Service } from "@/lib/service";
 
 export const Route = createFileRoute("/_authenticated/settings/creator_/services")({
   head: () => ({
@@ -69,6 +67,7 @@ function ServicesSettingsPage() {
   const creatorProfileId = creatorQuery.data?.profile.id;
   const categoriesQuery = useCreativeCategories();
   const servicesQuery = useMyServices(creatorProfileId);
+  const mySubQuery = useMySubscription();
   const save = useSaveService(creatorProfileId);
   const update = useUpdateService(creatorProfileId);
   const remove = useDeleteService(creatorProfileId);
@@ -79,6 +78,7 @@ function ServicesSettingsPage() {
   const [formError, setFormError] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Service | null>(null);
 
+  const isPro = mySubQuery.data?.plan.slug === "creator_pro";
   const items = useMemo(() => servicesQuery.data ?? [], [servicesQuery.data]);
   const categories = categoriesQuery.data ?? [];
   const atItemLimit = items.length >= SERVICE_LIMITS.items.max;
@@ -210,13 +210,22 @@ function ServicesSettingsPage() {
           />
         ) : (
           <>
-            <p className="text-sm text-muted-foreground">
-              {items.length} of {SERVICE_LIMITS.items.max} services
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p className="text-sm text-muted-foreground">
+                {items.length} of {isPro ? 50 : SERVICE_LIMITS.items.max} services
+              </p>
+            </div>
+            {!isPro ? (
+              <UpgradePrompt
+                compact
+                feature="Creator Pro unlocks up to 50 services, priority placement, and verified badge."
+              />
+            ) : null}
             {atItemLimit ? (
               <Alert>
                 <AlertDescription>
-                  You've reached the {SERVICE_LIMITS.items.max} service limit. Delete a service to add more.
+                  You've reached the {SERVICE_LIMITS.items.max} service limit. Delete a service to
+                  add more.
                 </AlertDescription>
               </Alert>
             ) : null}
