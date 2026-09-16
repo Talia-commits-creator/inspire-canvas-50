@@ -8,7 +8,9 @@
 - Completed locally: Phase 12 - Collaboration Foundation.
 - Completed locally: Phase 13 - Community Foundation.
 - Current phase: Phase 14 - Admin Foundation.
-- Next phase: Phase 15 - Media.
+- Completed locally: Phase 14 - Admin Foundation.
+- Current phase: Phase 15 - Media Foundation.
+- Next phase: Phase 16 - Premium.
 
 ## Booking Foundation
 
@@ -85,6 +87,21 @@ Not implemented or verified:
 
 - Entity mutation, moderation, billing, impersonation, bulk deletion, or deployment controls.
 - Live database authorization behavior or generated type verification.
+
+## Media Foundation
+
+Implemented locally:
+
+- Preserved the existing Creator Portfolio as the media asset and management model.
+- Added explicit private `avatars` and `portfolio` bucket provisioning with MIME and size limits.
+- Preserved existing owner-scoped Storage policies and signed-URL delivery.
+- Hardened portfolio uploads with MIME-derived extensions, UUID object names, and reusable validation at the upload boundary.
+- Supabase migration: `20260916050000_media_foundation.sql`.
+
+Not implemented or verified:
+
+- Transcoding, CDN, image transformation, livestreaming, realtime media, or AI processing.
+- Live Storage/database behavior or generated type verification.
 
 ## Community Foundation
 

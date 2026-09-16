@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
+import { validatePortfolioUploadFile } from "@/lib/portfolio";
 import type {
   PortfolioCategory,
   PortfolioItem,
@@ -58,22 +59,42 @@ export function usePortfolioMediaUrl(path: string | null | undefined) {
     staleTime: 30 * 60_000,
     retry: 1,
     queryFn: async () => {
-      const { data, error } = await supabase.storage.from("portfolio").createSignedUrl(path!, 60 * 60);
+      const { data, error } = await supabase.storage
+        .from("portfolio")
+        .createSignedUrl(path!, 60 * 60);
       if (error) throw error;
       return data.signedUrl;
     },
   });
 }
 
+const MIME_EXTENSIONS: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/avif": "avif",
+  "video/mp4": "mp4",
+  "video/webm": "webm",
+  "video/quicktime": "mov",
+  "audio/mpeg": "mp3",
+  "audio/mp3": "mp3",
+  "audio/wav": "wav",
+  "audio/x-wav": "wav",
+  "audio/mp4": "m4a",
+  "audio/aac": "aac",
+  "audio/ogg": "ogg",
+};
+
 function extensionFor(file: File) {
-  const fromName = file.name.split(".").pop();
-  if (fromName && /^[a-zA-Z0-9]{1,5}$/.test(fromName)) return fromName.toLowerCase();
-  return (file.type.split("/").pop() ?? "bin").toLowerCase();
+  return MIME_EXTENSIONS[file.type] ?? "bin";
 }
 
 /** Uploads into the creator's own folder — storage policies enforce ownership. */
 export async function uploadPortfolioFile(userId: string, file: File, kind: "media" | "cover") {
-  const path = `${userId}/${kind}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extensionFor(file)}`;
+  const validationError = validatePortfolioUploadFile(file, kind);
+  if (validationError) throw new Error(validationError);
+
+  const path = `${userId}/${kind}-${crypto.randomUUID()}.${extensionFor(file)}`;
   const { error } = await supabase.storage.from("portfolio").upload(path, file, {
     cacheControl: "3600",
     contentType: file.type,

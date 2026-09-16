@@ -63,7 +63,15 @@ export const MEDIA_RULES: Record<
     label: "MP4, WebM or MOV. Up to 100 MB.",
   },
   audio: {
-    types: ["audio/mpeg", "audio/mp3", "audio/wav", "audio/x-wav", "audio/mp4", "audio/aac", "audio/ogg"],
+    types: [
+      "audio/mpeg",
+      "audio/mp3",
+      "audio/wav",
+      "audio/x-wav",
+      "audio/mp4",
+      "audio/aac",
+      "audio/ogg",
+    ],
     accept: "audio/mpeg,audio/wav,audio/mp4,audio/aac,audio/ogg",
     maxBytes: 30 * 1024 * 1024,
     label: "MP3, WAV, M4A, AAC or OGG. Up to 30 MB.",
@@ -78,7 +86,9 @@ export const COVER_RULES = {
 };
 
 function formatSize(bytes: number) {
-  return bytes >= 1024 * 1024 ? `${Math.round(bytes / (1024 * 1024))} MB` : `${Math.round(bytes / 1024)} KB`;
+  return bytes >= 1024 * 1024
+    ? `${Math.round(bytes / (1024 * 1024))} MB`
+    : `${Math.round(bytes / 1024)} KB`;
 }
 
 export function validateMediaFile(
@@ -87,7 +97,21 @@ export function validateMediaFile(
 ): string | undefined {
   const rules = kind === "cover" ? COVER_RULES : MEDIA_RULES[kind];
   if (!rules.types.includes(file.type)) return `That file type isn't supported. ${rules.label}`;
-  if (file.size > rules.maxBytes) return `That file is too large. Maximum ${formatSize(rules.maxBytes)}.`;
+  if (file.size > rules.maxBytes)
+    return `That file is too large. Maximum ${formatSize(rules.maxBytes)}.`;
+  return undefined;
+}
+
+/** Validates an upload at the storage boundary when the specific media subtype is not available. */
+export function validatePortfolioUploadFile(
+  file: File,
+  kind: "media" | "cover",
+): string | undefined {
+  if (kind === "cover") return validateMediaFile(file, "cover");
+
+  const rule = Object.values(MEDIA_RULES).find((candidate) => candidate.types.includes(file.type));
+  if (!rule) return "That file type isn't supported for portfolio media.";
+  if (file.size > rule.maxBytes) return `That file is too large. ${rule.label}`;
   return undefined;
 }
 
