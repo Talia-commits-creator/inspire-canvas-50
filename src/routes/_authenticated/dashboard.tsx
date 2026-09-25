@@ -66,7 +66,9 @@ function DashboardPage() {
     <SiteLayout>
       <PageHeader
         eyebrow="Workspace"
-        title={profile?.display_name ? `Welcome back, ${profile.display_name}` : "Welcome back"}
+        title={
+          profile?.display_name ? `Welcome, ${profile.display_name}` : "Welcome to your workspace"
+        }
         description="What would you like to make happen next? Your creative workspace starts here."
         actions={
           <>

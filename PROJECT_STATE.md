@@ -13,6 +13,29 @@
 - Completed locally: Phase 17 - Polish & Launch Readiness.
 - Next phase: Phase 18 - Live Supabase verification and deployment readiness.
 
+## Phase 20 — UX & Content Polish
+
+Status: Implemented locally. This batch preserves the Phase 19 visual system, routes, authentication, RLS, and Supabase integration.
+
+Implemented:
+
+- Retained the Phase 19 homepage's local CSS creative illustration and meaningful “Talent · Opportunity · Community / Make something meaningful” message; it uses no remote stock image or hotlinked asset.
+- Added a first-post action to the public Community empty state for signed-in users, with a login action for signed-out visitors. Query failures continue to show the error and retry action.
+- Replaced the About development placeholder with the existing mission and concise explanations for creators, clients/organizations, and the community; no unsupported stats or history were added.
+- Added Contact links for phone, WhatsApp, and `hello@inspiretoaspire.com`. The page explicitly says the mailbox may not be active until configured.
+- Changed the dashboard greeting to a neutral welcome that does not claim to know whether the user is new or returning.
+- Updated successful zero-result states for Bookings, Collaborations, and My Community Posts, including creator browsing or first-post actions. Existing query error/retry branches remain intact.
+- Projects & Work copy and behavior were not changed.
+- Repository demo creator samples are used only by the style guide. The public directory reads live rows from Supabase `list_public_creators`; this repository contains no reliable demo marker or exact demo-row identifiers. No public profiles were hidden by guesswork, no records were deleted, and no remote database operation was performed. Removing those demo rows safely requires the exact records to be identified with Supabase access restored.
+
+Verification:
+
+- `npx tsc --noEmit`: passed.
+- Changed-file ESLint: passed with no warnings or errors.
+- `npm run build`: passed. Existing Vite `vite-tsconfig-paths` and TanStack `inputValidator()` deprecation notices remain.
+- `git diff --check`: passed; Git reported only the existing LF-to-CRLF working-copy notices.
+- Browser review: homepage creative hero, About, Contact, and public Community were reviewed at a narrow browser viewport. The hero message and CSS artwork are readable; About cards and Contact links remain readable; the Community feed failure shows its existing error/retry state rather than a false empty message. Authenticated routes were not visually reviewed because the public Supabase path remains inaccessible.
+
 ## Booking Foundation
 
 Implemented locally:

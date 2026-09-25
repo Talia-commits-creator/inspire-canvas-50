@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { CollaborationCard } from "@/components/collaborations/collaboration-card";
 import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
@@ -51,7 +51,12 @@ function CollaborationsPage() {
         ) : collaborations.length === 0 ? (
           <EmptyState
             title="No collaborations yet"
-            description="Start one from an accepted booking request when you are ready to work together."
+            description="Collaborations begin when a creator accepts a booking request. Browse creators to find someone to work with."
+            action={
+              <Link to="/creators">
+                <Button>Browse creators</Button>
+              </Link>
+            }
           />
         ) : (
           <ul className="space-y-4">

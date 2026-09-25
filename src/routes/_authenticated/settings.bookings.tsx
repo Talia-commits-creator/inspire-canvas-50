@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookingCard } from "@/components/bookings/booking-card";
 import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
@@ -77,8 +77,13 @@ function MyBookingsPage() {
           </Alert>
         ) : bookings.length === 0 ? (
           <EmptyState
-            title="No booking requests yet"
-            description="When you request a public creator service, you will see its status here."
+            title="No current bookings"
+            description="Browse creator profiles and request a service to get started. Your requests will appear here."
+            action={
+              <Link to="/creators">
+                <Button>Browse creators</Button>
+              </Link>
+            }
           />
         ) : (
           <ul className="space-y-4">

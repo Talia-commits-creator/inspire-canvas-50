@@ -100,7 +100,23 @@ function CommunityPage() {
         ) : posts.length === 0 ? (
           <EmptyState
             title="The community is just getting started"
-            description="Be the first to share an update."
+            description="Be the first to share an update, idea, opportunity, or piece of work."
+            action={
+              user ? (
+                <Button
+                  onClick={() => {
+                    setFormError(null);
+                    setDialogOpen(true);
+                  }}
+                >
+                  Create the first post
+                </Button>
+              ) : (
+                <Link to="/login" search={{ redirect: "/community" }}>
+                  <Button variant="outline">Log in to share</Button>
+                </Link>
+              )
+            }
           />
         ) : (
           posts.map((post) => <PublicCommunityPostCard key={post.id} post={post} />)
