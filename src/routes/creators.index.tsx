@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { EmptyState } from "@/components/common/empty-state";
@@ -14,7 +14,8 @@ export const Route = createFileRoute("/creators/")({
       { title: "Creators — Inspire to Aspire" },
       {
         name: "description",
-        content: "Meet the creators on Inspire to Aspire: DJs, photographers, producers, writers and more.",
+        content:
+          "Meet the creators on Inspire to Aspire: DJs, photographers, producers, writers and more.",
       },
       { property: "og:title", content: "Creators — Inspire to Aspire" },
       {
@@ -25,13 +26,30 @@ export const Route = createFileRoute("/creators/")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  errorComponent: () => (
-    <SiteLayout>
-      <PageHeader eyebrow="Creators" title="Something went wrong" description="We couldn't load creators." />
-    </SiteLayout>
-  ),
+  errorComponent: CreatorDirectoryError,
   component: CreatorsIndexPage,
 });
+
+function CreatorDirectoryError() {
+  const router = useRouter();
+  return (
+    <SiteLayout>
+      <PageHeader
+        eyebrow="Creators"
+        title="The directory couldn't load"
+        description="Your connection may be interrupted. Try again, or explore another part of the ecosystem."
+        actions={
+          <>
+            <Button onClick={() => void router.invalidate()}>Try again</Button>
+            <Link to="/discover">
+              <Button variant="outline">Explore the platform</Button>
+            </Link>
+          </>
+        }
+      />
+    </SiteLayout>
+  );
+}
 
 function CreatorsIndexPage() {
   const { creators } = Route.useLoaderData() as { creators: CreatorListItem[] };
@@ -40,8 +58,8 @@ function CreatorsIndexPage() {
     <SiteLayout>
       <PageHeader
         eyebrow="Creators"
-        title="Talent, disciplines and creative voices"
-        description="Creators who have made their profile public. Discovery filters arrive in a later phase."
+        title="Meet the people behind the work"
+        description="Browse public creator profiles, explore their practice and find the right person for what you have in mind."
         actions={
           <Link to="/settings/creator">
             <Button>Become a creator</Button>

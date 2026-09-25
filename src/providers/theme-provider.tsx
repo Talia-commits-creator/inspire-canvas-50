@@ -6,13 +6,10 @@ const ThemeContext = createContext<Ctx | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     const t = getStoredTheme();
     setThemeState(t);
     applyTheme(t);
-    setMounted(true);
   }, []);
 
   const setTheme = (t: Theme) => {
@@ -28,7 +25,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         toggle: () => setTheme(theme === "dark" ? "light" : "dark"),
       }}
     >
-      <div style={{ visibility: mounted ? "visible" : "visible" }}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
 }

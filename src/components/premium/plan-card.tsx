@@ -41,9 +41,9 @@ export function PlanCard({ plan, isCurrentPlan = false, highlighted = false }: P
   return (
     <>
       <Card
-        className={`relative flex flex-col transition-all duration-200 ${
+        className={`creative-card relative flex flex-col transition-all duration-200 ${
           highlighted
-            ? "border-primary shadow-md ring-1 ring-primary/20"
+            ? "border-gold/60 bg-[linear-gradient(165deg,color-mix(in_oklab,var(--color-gold)_10%,var(--color-card)),var(--color-card)_42%)] shadow-md ring-1 ring-gold/25"
             : "border-border hover:border-border/80"
         }`}
       >

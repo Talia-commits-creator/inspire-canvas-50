@@ -147,11 +147,15 @@ function PublicCreatorPage() {
     <SiteLayout>
       <PageHeader eyebrow="Creator" title={name} description={creator.headline} />
 
-      <div className="mx-auto w-full max-w-4xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <Card>
+      <div className="mx-auto w-full max-w-5xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <Card className="overflow-hidden border-primary/15 shadow-[var(--shadow-soft)]">
+          <div
+            aria-hidden
+            className="h-28 bg-[radial-gradient(ellipse_at_78%_20%,color-mix(in_oklab,var(--color-coral)_42%,transparent),transparent_30%),linear-gradient(120deg,var(--surface-warm),var(--surface-teal))] sm:h-36"
+          />
           <CardContent className="space-y-6 pt-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary">
+              <div className="-mt-16 h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-4 border-card bg-secondary shadow-sm sm:-mt-20 sm:h-28 sm:w-28">
                 {profile.avatar_url ? (
                   <img
                     src={profile.avatar_url}
@@ -166,7 +170,7 @@ function PublicCreatorPage() {
               </div>
 
               <div className="min-w-0 space-y-2">
-                <p className="font-display text-xl font-semibold">{name}</p>
+                <p className="font-display text-2xl font-semibold tracking-tight">{name}</p>
                 <Link
                   to="/profile/$username"
                   params={{ username: profile.username }}
@@ -263,7 +267,7 @@ function PublicCreatorPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-border/80">
           <CardHeader>
             <CardTitle className="font-display text-xl">Portfolio</CardTitle>
           </CardHeader>
@@ -289,7 +293,7 @@ function PublicCreatorPage() {
                   return (
                     <div
                       key={service.id}
-                      className="flex flex-col justify-between rounded-xl border border-border bg-card p-5"
+                      className="creative-card flex flex-col justify-between rounded-2xl border border-border bg-card p-5"
                     >
                       <div className="space-y-3">
                         <div className="flex flex-wrap items-center gap-2">
@@ -315,7 +319,7 @@ function PublicCreatorPage() {
                         </div>
                       </div>
                       <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-                        <span className="font-display text-base font-semibold text-foreground">
+                        <span className="font-display text-lg font-semibold text-foreground">
                           {priceText}
                         </span>
                         {canRequest ? (

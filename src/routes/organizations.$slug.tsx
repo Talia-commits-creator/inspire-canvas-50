@@ -9,14 +9,19 @@ import type { PublicOrganization } from "@/lib/organization";
 
 export const Route = createFileRoute("/organizations/$slug")({
   loader: async ({ params }) => {
-    const organization = (await getPublicOrganization({ data: { slug: params.slug } })) as PublicOrganization | null;
+    const organization = (await getPublicOrganization({
+      data: { slug: params.slug },
+    })) as PublicOrganization | null;
     if (!organization) throw notFound();
     return { organization };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Organization not found — Inspire to Aspire" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Organization not found — Inspire to Aspire" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const { organization } = loaderData;
@@ -49,19 +54,34 @@ export const Route = createFileRoute("/organizations/$slug")({
 
 function PublicOrganizationPage() {
   const { organization } = Route.useLoaderData() as { organization: PublicOrganization };
-  const links = Object.entries(organization.links ?? {}).filter(([, value]) => Boolean(value)) as [string, string][];
+  const links = Object.entries(organization.links ?? {}).filter(([, value]) => Boolean(value)) as [
+    string,
+    string,
+  ][];
 
   return (
     <SiteLayout>
-      <PageHeader eyebrow="Organization" title={organization.name} description={organization.short_description} />
+      <PageHeader
+        eyebrow={organization.organization_type}
+        title={organization.name}
+        description={organization.short_description}
+      />
 
-      <div className="mx-auto w-full max-w-4xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <Card>
+      <div className="mx-auto w-full max-w-5xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <Card className="overflow-hidden border-gold/20 shadow-[var(--shadow-soft)]">
+          <div
+            aria-hidden
+            className="h-28 bg-[radial-gradient(ellipse_at_80%_22%,color-mix(in_oklab,var(--color-gold)_65%,transparent),transparent_30%),linear-gradient(125deg,var(--surface-warm),var(--surface-teal))] sm:h-36"
+          />
           <CardContent className="space-y-6 pt-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-border bg-secondary">
+              <div className="-mt-16 h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-4 border-card bg-secondary shadow-sm sm:-mt-20 sm:h-28 sm:w-28">
                 {organization.logo_url ? (
-                  <img src={organization.logo_url} alt={`${organization.name} logo`} className="h-full w-full object-cover" />
+                  <img
+                    src={organization.logo_url}
+                    alt={`${organization.name} logo`}
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
                   <div className="grid h-full w-full place-items-center font-display text-2xl font-semibold text-muted-foreground">
                     {organization.name
@@ -75,15 +95,21 @@ function PublicOrganizationPage() {
               </div>
 
               <div className="min-w-0 space-y-2">
-                <p className="font-display text-xl font-semibold">{organization.name}</p>
+                <p className="font-display text-2xl font-semibold tracking-tight">
+                  {organization.name}
+                </p>
                 <div className="flex flex-wrap items-center gap-2 pt-1">
-                  <Badge>{organization.organization_type}</Badge>
-                  {organization.visibility === "public" ? <Badge variant="secondary">Public</Badge> : <Badge variant="outline">Private</Badge>}
+                  <Badge variant="gold">{organization.organization_type}</Badge>
                 </div>
                 <div className="flex flex-wrap gap-4 pt-1 text-sm text-muted-foreground">
                   {organization.location ? <span>{organization.location}</span> : null}
                   {organization.website ? (
-                    <a href={organization.website} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-foreground">
+                    <a
+                      href={organization.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline underline-offset-4 hover:text-foreground"
+                    >
                       {organization.website.replace(/^https?:\/\//, "")}
                     </a>
                   ) : null}
@@ -93,8 +119,8 @@ function PublicOrganizationPage() {
 
             {organization.description ? (
               <div className="space-y-2">
-                <h2 className="text-sm font-medium">About</h2>
-                <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+                <h2 className="font-display text-xl font-semibold">About</h2>
+                <p className="whitespace-pre-line text-base leading-relaxed text-muted-foreground">
                   {organization.description}
                 </p>
               </div>
@@ -106,7 +132,12 @@ function PublicOrganizationPage() {
                 <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
                   {links.map(([platform, href]) => (
                     <li key={platform}>
-                      <a href={href} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-foreground">
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline underline-offset-4 hover:text-foreground"
+                      >
                         {platform}
                       </a>
                     </li>

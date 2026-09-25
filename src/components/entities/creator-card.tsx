@@ -33,13 +33,18 @@ export function CreatorCard({
   className?: string;
 }) {
   return (
-    <Card className={cn("group flex flex-col overflow-hidden hover:border-foreground/20", className)}>
+    <Card
+      className={cn(
+        "creative-card group flex flex-col overflow-hidden hover:border-primary/35",
+        className,
+      )}
+    >
       {creator.avatarUrl ? (
         <img
           src={creator.avatarUrl}
           alt={`${creator.name} profile photo`}
           loading="lazy"
-          className="aspect-[4/3] w-full object-cover"
+          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
         />
       ) : (
         <div
@@ -49,7 +54,7 @@ export function CreatorCard({
         />
       )}
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
         <div className="flex flex-col gap-1">
           <div className="flex flex-wrap items-start gap-x-2">
             <h3 className="font-display text-lg font-semibold leading-snug tracking-tight">

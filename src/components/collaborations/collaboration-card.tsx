@@ -11,7 +11,7 @@ const STATUS_VARIANT: Record<CollaborationStatus, "success" | "gold" | "muted"> 
 
 export function CollaborationCard({ collaboration }: { collaboration: Collaboration }) {
   return (
-    <li className="rounded-xl border border-border bg-card p-5">
+    <li className="creative-card rounded-2xl border border-border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -30,7 +30,10 @@ export function CollaborationCard({ collaboration }: { collaboration: Collaborat
         </p>
       ) : null}
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+      <div
+        className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4"
+        aria-label="Collaboration participants"
+      >
         {collaboration.participants.map((participant) => (
           <Badge key={`${participant.user_id}-${participant.role}`} variant="secondary">
             {COLLABORATION_ROLE_LABELS[participant.role]}

@@ -64,7 +64,7 @@ function CommunityPage() {
       <PageHeader
         eyebrow="Community"
         title="Where the ecosystem gathers"
-        description="Updates, ideas, opportunities, and creative work shared by the Inspire to Aspire community."
+        description="A calm, welcoming stream of updates, ideas, opportunities and creative work shared by the community."
         actions={
           user ? (
             <Button

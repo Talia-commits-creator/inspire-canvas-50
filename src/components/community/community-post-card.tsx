@@ -5,7 +5,7 @@ import { COMMUNITY_STATUS_LABELS, COMMUNITY_VISIBILITY_LABELS } from "@/lib/comm
 
 export function PublicCommunityPostCard({ post }: { post: PublicCommunityPost }) {
   return (
-    <article className="rounded-xl border border-border bg-card p-5 sm:p-6">
+    <article className="creative-card rounded-2xl border border-border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
@@ -37,7 +37,7 @@ export function CommunityPostCard({
   onDelete: () => void;
 }) {
   return (
-    <li className="rounded-xl border border-border bg-card p-5">
+    <li className="creative-card rounded-2xl border border-border bg-card p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="font-display text-lg font-semibold">{post.title}</h2>

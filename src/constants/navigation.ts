@@ -11,7 +11,7 @@ export const PRIMARY_NAV = [
   { to: "/organizations", label: "Organizations" },
   { to: "/projects", label: "Projects" },
   { to: "/community", label: "Community" },
-  { to: "/pricing", label: "Pricing" },
+  { to: "/pricing", label: "Plans" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;

@@ -28,13 +28,13 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/90 backdrop-blur-xl">
       <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:h-18 lg:px-8">
         <Link
           to="/"
-          className="flex min-w-0 items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
+          className="flex min-w-0 items-center gap-2.5 rounded-md font-display text-lg font-semibold tracking-tight"
         >
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary font-display text-sm font-semibold text-primary-foreground">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary font-display text-sm font-semibold text-primary-foreground shadow-sm">
             {SITE.short}
           </span>
           <span className="truncate">{SITE.name}</span>
@@ -47,7 +47,7 @@ export function Navbar() {
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
-                className="shrink-0 rounded-md px-2 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground xl:px-3 xl:py-2 xl:text-sm"
+                className="shrink-0 rounded-full px-2 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground xl:px-3 xl:text-sm"
                 activeProps={{ className: "text-foreground font-semibold" }}
               >
                 {item.label}

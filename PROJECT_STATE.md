@@ -170,3 +170,118 @@ Known live Supabase blockers:
 3. Confirm the remote schema includes the Creator Services dependencies.
 4. Apply only the approved pending Supabase migration(s).
 5. Regenerate and review `src/integrations/supabase/types.ts`.
+
+## Phase 19 — Visual Identity, UX & Engagement Redesign
+
+Status: Implemented locally. UI changes preserve the existing route, feature, auth, security, and backend boundaries.
+
+### 19A — Visual Design Foundation
+
+- Refined the existing teal, gold, coral, warm-neutral, semantic, and dark theme tokens; preserved Fredoka and Inter.
+- Preserved and refined the existing Button, Card, Badge, PageHeader, EmptyState, dialogs, forms, alerts, and loading patterns.
+- Added reusable creative-card hover motion, warm and teal surface utilities, selection styling, and a shared reduced-motion treatment.
+- Added an early theme initialization script to reduce light/dark theme flash while retaining the existing theme provider and storage behavior.
+- Improved shared focus, navigation, mobile button touch size, elevation, and radius treatment.
+
+### 19B — Homepage + Public Experience
+
+- Reworked the homepage around talent, opportunity, and community with clear creator, opportunity, and community paths.
+- Replaced placeholder photography with a lightweight abstract brand illustration treatment designed to accept authentic imagery later.
+- Rebuilt Discover as a clear gateway to actual creators, organizations, projects/work, and community routes; it does not imply filters or backend capabilities that do not exist.
+- Refined public navigation styling while preserving all destinations.
+- Replaced the projects placeholder with an honest explanation of the existing profile-service-booking-collaboration journey.
+
+### 19C — Creator + Organization Discovery
+
+- Refined creator discovery copy, hover treatment, imagery placeholders, and card hierarchy while continuing to use actual public creator records.
+- Updated creator profile identity and service presentation, preserving portfolio, service, booking, and external link behavior.
+- Added a reusable organization listing card using actual public organization data, including logo, type, location, description, and profile link.
+- Refined organization profile identity and about content using the shared Card and Badge primitives.
+
+### 19D — Services + Bookings + Collaborations
+
+- Improved service cards and price hierarchy while preserving fixed, starting-from, and contact pricing semantics.
+- Improved booking and collaboration workspace card hierarchy and added an accessible visual booking lifecycle cue alongside readable status labels.
+- Preserved request, decision, and accepted-booking-to-collaboration behavior and existing loading, error, and empty states.
+
+### 19E — Dashboard + Community + Premium
+
+- Added a responsive “Your workspace” quick-action group for Creator Studio, Organizations, Bookings, Collaborations, and Community.
+- Improved dashboard hierarchy around practical next actions without changing its existing profile, membership, creator, organization, and admin features.
+- Refined public and authored community post surfaces; retained only existing publish, visibility, edit, and delete behavior.
+- Refined premium plan-card emphasis with restrained gold treatment; preserved current plan, price, entitlement, and billing-provider semantics.
+
+### 19F — Mobile + Responsive Experience
+
+- Kept the current mobile navigation architecture and all destinations; refined navigation surface styling and focus treatment.
+- Tuned homepage, discovery, workspace, cards, forms, and CTAs with responsive reflow and 44px mobile small-button targets.
+
+### 19G — Accessibility + Consistency + Visual QA
+
+- Added shared reduced-motion behavior, visible focus and selection treatment, accessible labels for lifecycle/participant cues, and text status labels that do not rely on color alone.
+- Applied shared spacing, border, radius, elevation, responsive, and hover conventions across changed surfaces.
+- Browser visual review covered the homepage, Discover, Projects, and the creator directory recovery state at a narrow viewport; layout, route links, and retry navigation are visible and readable.
+- TypeScript: `npx tsc --noEmit` passed after all Phase 19 changes.
+- Changed-file ESLint: passed with zero errors; two existing Fast Refresh export warnings remain in the shared Button and ThemeProvider modules.
+- Repository lint: `npm run lint` failed with 642 pre-existing Prettier errors and 17 warnings. Changed TypeScript/TSX files were run through Prettier and direct ESLint; unrelated files were left untouched.
+- Production build: `npm run build` passed. Existing Vite `vite-tsconfig-paths` and TanStack `inputValidator()` deprecation notices remain.
+- `git diff --check`: passed; Git emitted only existing LF-to-CRLF working-copy notices.
+
+### Phase 19 files changed
+
+- `PROJECT_STATE.md`
+- `src/styles.css`
+- `src/components/ui/button.tsx`
+- `src/components/ui/card.tsx`
+- `src/components/common/page-header.tsx`
+- `src/components/common/empty-state.tsx`
+- `src/components/layout/navbar.tsx`
+- `src/components/entities/creator-card.tsx`
+- `src/components/entities/organization-card.tsx`
+- `src/components/services/service-manager-card.tsx`
+- `src/components/bookings/booking-card.tsx`
+- `src/components/collaborations/collaboration-card.tsx`
+- `src/components/community/community-post-card.tsx`
+- `src/components/premium/plan-card.tsx`
+- `src/constants/navigation.ts`
+- `src/providers/theme-provider.tsx`
+- `src/routes/__root.tsx`
+- `src/routes/index.tsx`
+- `src/routes/discover.tsx`
+- `src/routes/projects.tsx`
+- `src/routes/creators.index.tsx`
+- `src/routes/creators.$username.tsx`
+- `src/routes/organizations.tsx`
+- `src/routes/organizations.$slug.tsx`
+- `src/routes/community.tsx`
+- `src/routes/_authenticated/dashboard.tsx`
+
+### Verification and limitations
+
+- Verification results: to be recorded after TypeScript, lint, build, and diff checks complete.
+- No Supabase migrations, schema, RLS, database functions, generated types, authentication logic, authorization, environment variables, or backend data hooks were modified.
+- Live Supabase functionality was not verified or claimed as verified.
+- The Phase 18 Supabase access blocker remains unresolved; do not attempt reconciliation as part of Phase 19.
+- Authentic creator photography is not present in the existing interface; abstract placeholders provide a reusable visual frame until authentic portfolio imagery is available.
+
+## Phase 18 - Live Supabase Reconciliation & Backend Verification
+
+Status: Blocked at Step 1 (access check). No remote schema inspection or database changes were made.
+
+Access check results on 2026-09-25:
+
+- Supabase CLI version: `2.117.0`.
+- `supabase projects list` returned an empty `projects` array.
+- `supabase migration list --project-ref hfhovsuvsavkekqppxlq` could not connect and returned `LegacyDbConfigIpv6Error`: IPv6 is not supported on the current network.
+- The CLI-recommended `supabase link --project-ref hfhovsuvsavkekqppxlq` attempt returned `LegacyLinkProjectStatusError`: the account lacks the privileges needed to access the project-status endpoint (Supabase Access Control).
+- Project access is therefore unavailable to the current account. The remote migration history and schema remain unknown.
+
+Not performed:
+
+- No migrations were applied; no migration files were modified.
+- No generated Supabase types were regenerated or edited.
+- No Community, Booking, Collaboration, or other live backend flows were verified.
+- No frontend files were changed.
+- No Phase 18 implementation commit was created.
+
+Required to resume: grant the authenticated Supabase account access to the existing project `hfhovsuvsavkekqppxlq` and resolve the network's IPv6 limitation or provide the supported IPv4 link path. Then repeat the read-only access and remote inspection steps before considering any migration reconciliation.

@@ -67,7 +67,7 @@ function DashboardPage() {
       <PageHeader
         eyebrow="Workspace"
         title={profile?.display_name ? `Welcome back, ${profile.display_name}` : "Welcome back"}
-        description="Your account home. Manage how you are represented across Inspire to Aspire."
+        description="What would you like to make happen next? Your creative workspace starts here."
         actions={
           <>
             <Link to="/settings/profile">
@@ -88,7 +88,7 @@ function DashboardPage() {
         }
       />
 
-      <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         {isLoading ? (
           <div className="space-y-4">
             <Skeleton className="h-40 w-full rounded-xl" />
@@ -104,7 +104,79 @@ function DashboardPage() {
             </AlertDescription>
           </Alert>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-8">
+            <section aria-labelledby="workspace-heading">
+              <div className="mb-4 flex items-end justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                    Your workspace
+                  </p>
+                  <h2 id="workspace-heading" className="mt-1 font-display text-2xl font-semibold">
+                    Pick up where you need to
+                  </h2>
+                </div>
+                <Badge variant="gold">{subscription?.plan.name ?? "Free Community"}</Badge>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  {
+                    label: "Creator Studio",
+                    detail: "Profile, services & portfolio",
+                    to: "/settings/creator",
+                    icon: Sparkles,
+                    tone: "surface-warm",
+                  },
+                  {
+                    label: "Organizations",
+                    detail: "Manage your organization",
+                    to: "/settings/organization",
+                    icon: Building2,
+                    tone: "surface-teal",
+                  },
+                  {
+                    label: "Bookings",
+                    detail: "Review your requests",
+                    to: "/settings/bookings",
+                    icon: Calendar,
+                    tone: "bg-secondary/65",
+                  },
+                  {
+                    label: "Collaborations",
+                    detail: "Open shared workspaces",
+                    to: "/settings/collaborations",
+                    icon: Users,
+                    tone: "bg-secondary/65",
+                  },
+                  {
+                    label: "Community",
+                    detail: "Manage your posts",
+                    to: "/settings/community",
+                    icon: FileText,
+                    tone: "bg-secondary/65",
+                  },
+                ].map(({ label, detail, to, icon: Icon, tone }) => (
+                  <Link
+                    key={label}
+                    to={to}
+                    className={`creative-card group flex min-h-28 items-center gap-4 rounded-2xl border border-border/70 p-4 ${tone}`}
+                  >
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-background/80 text-primary">
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-display font-semibold">{label}</span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">{detail}</span>
+                    </span>
+                    <span
+                      aria-hidden
+                      className="text-lg text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
+                    >
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
             <Card>
               <CardHeader>
                 <CardTitle className="font-display text-xl">Your profile</CardTitle>

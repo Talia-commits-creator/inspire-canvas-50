@@ -35,7 +35,7 @@ export function ServiceManagerCard({
   const turnaroundText = formatTurnaround(item.turnaround_days);
 
   return (
-    <li className="flex flex-col justify-between overflow-hidden rounded-xl border border-border bg-card p-5">
+    <li className="creative-card flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-5">
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-2">
           {category ? <Badge variant="secondary">{category.name}</Badge> : null}
@@ -54,7 +54,7 @@ export function ServiceManagerCard({
         <div className="min-w-0 space-y-1">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="truncate font-display text-lg font-semibold">{item.title}</h3>
-            <span className="font-display text-base font-semibold text-foreground">
+            <span className="font-display text-lg font-semibold text-foreground">
               {formattedPrice}
             </span>
           </div>
@@ -71,7 +71,13 @@ export function ServiceManagerCard({
           <Pencil className="size-4" aria-hidden />
           Edit
         </Button>
-        <Button type="button" variant="outline" size="sm" onClick={onToggleVisibility} disabled={busy}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={onToggleVisibility}
+          disabled={busy}
+        >
           {item.visibility === "public" ? "Make private" : "Make public"}
         </Button>
         <Button
