@@ -14,6 +14,8 @@ import { useCreateCollaborationFromBooking } from "@/hooks/use-collaborations";
 import { CollaborationStartForm } from "@/components/collaborations/collaboration-start-form";
 import { collaborationErrorMessage } from "@/lib/collaboration";
 import { useState } from "react";
+import { useProfile } from "@/hooks/use-profile";
+import { CreatorSettingsNav } from "@/components/creator/creator-settings-nav";
 import {
   Dialog,
   DialogContent,
@@ -33,6 +35,8 @@ export const Route = createFileRoute("/_authenticated/settings/creator_/bookings
 });
 
 function CreatorBookingsPage() {
+  const profileQuery = useProfile();
+  const username = profileQuery.data?.username;
   const bookingsQuery = useCreatorBookings();
   const updateStatus = useUpdateBookingStatus();
   const createCollaboration = useCreateCollaborationFromBooking();
@@ -73,7 +77,9 @@ function CreatorBookingsPage() {
         title="Booking requests"
         description="Review requests for your public services and decide which ones to accept."
       />
-      <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto w-full max-w-3xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <CreatorSettingsNav currentTab="bookings" publicUsername={username} />
+
         {bookingsQuery.isLoading ? (
           <div className="space-y-4">
             <Skeleton className="h-48 w-full rounded-xl" />

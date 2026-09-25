@@ -1,7 +1,16 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Globe, MapPin } from "lucide-react";
+import {
+  Briefcase,
+  Building2,
+  Calendar,
+  FileText,
+  Globe,
+  MapPin,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
@@ -13,6 +22,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useAuth } from "@/hooks/use-auth";
 import { useAvatarUrl, useProfile, useRoles } from "@/hooks/use-profile";
 import { useMySubscription } from "@/hooks/use-premium";
+import { useMyCreatorProfile } from "@/hooks/use-creator";
+import { useMyOrganization } from "@/hooks/use-organization";
 import { PROFILE_FIELD_LABELS, initialsFrom, profileCompletion } from "@/lib/profile";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -35,6 +46,8 @@ function DashboardPage() {
   const { data: roles } = useRoles();
   const { data: avatarUrl } = useAvatarUrl(profile?.avatar_url);
   const { data: subscription } = useMySubscription();
+  const { data: creatorData } = useMyCreatorProfile();
+  const { data: orgData } = useMyOrganization();
 
   const completion = profileCompletion(profile ?? null);
 
@@ -59,15 +72,6 @@ function DashboardPage() {
           <>
             <Link to="/settings/profile">
               <Button>Edit profile</Button>
-            </Link>
-            <Link to="/settings/bookings">
-              <Button variant="outline">My bookings</Button>
-            </Link>
-            <Link to="/settings/collaborations">
-              <Button variant="outline">Collaborations</Button>
-            </Link>
-            <Link to="/settings/community">
-              <Button variant="outline">My community posts</Button>
             </Link>
             <Link to="/settings/plans">
               <Button variant="outline">Membership & Plans</Button>
@@ -227,6 +231,140 @@ function DashboardPage() {
                   <Link to="/pricing">
                     <Button variant="ghost" size="sm">
                       Compare all plans
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="size-5 text-primary" aria-hidden />
+                    <CardTitle className="font-display text-xl">Creator Studio</CardTitle>
+                  </div>
+                  {creatorData ? (
+                    <Badge variant="secondary" className="capitalize">
+                      {creatorData.profile.availability}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline">Not yet set up</Badge>
+                  )}
+                </div>
+                <CardDescription>
+                  {creatorData
+                    ? creatorData.profile.headline
+                    : "Become a creator to list services, showcase your portfolio, and receive booking requests."}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {creatorData ? (
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    <Link to="/settings/creator">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Profile
+                      </Button>
+                    </Link>
+                    <Link to="/settings/creator/services">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Services
+                      </Button>
+                    </Link>
+                    <Link to="/settings/creator/portfolio">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Portfolio
+                      </Button>
+                    </Link>
+                    <Link to="/settings/creator/bookings">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Bookings
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <Link to="/settings/creator">
+                    <Button size="sm">Become a creator</Button>
+                  </Link>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="size-5 text-primary" aria-hidden />
+                    <CardTitle className="font-display text-xl">Organization</CardTitle>
+                  </div>
+                  {orgData ? (
+                    <Badge variant="secondary" className="capitalize">
+                      {orgData.organization_type}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline">Not created</Badge>
+                  )}
+                </div>
+                <CardDescription>
+                  {orgData
+                    ? orgData.name +
+                      (orgData.short_description ? ` — ${orgData.short_description}` : "")
+                    : "Establish a public profile for your studio, university, community group, or brand."}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  <Link to="/settings/organization">
+                    <Button variant={orgData ? "outline" : "default"} size="sm">
+                      {orgData ? "Manage organization" : "Create organization"}
+                    </Button>
+                  </Link>
+                  {orgData ? (
+                    <Link to="/organizations/$slug" params={{ slug: orgData.slug }}>
+                      <Button variant="ghost" size="sm">
+                        View public profile
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link to="/organizations">
+                      <Button variant="ghost" size="sm">
+                        Browse directory
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Briefcase className="size-5 text-primary" aria-hidden />
+                  <CardTitle className="font-display text-xl">Workspaces & Community</CardTitle>
+                </div>
+                <CardDescription>
+                  Manage requests sent to creators, shared collaboration workspaces, and your public
+                  community posts.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                  <Link to="/settings/bookings">
+                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                      <Calendar className="size-4 text-muted-foreground" aria-hidden />
+                      <span>My bookings</span>
+                    </Button>
+                  </Link>
+                  <Link to="/settings/collaborations">
+                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                      <Users className="size-4 text-muted-foreground" aria-hidden />
+                      <span>Collaborations</span>
+                    </Button>
+                  </Link>
+                  <Link to="/settings/community">
+                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                      <FileText className="size-4 text-muted-foreground" aria-hidden />
+                      <span>Community posts</span>
                     </Button>
                   </Link>
                 </div>

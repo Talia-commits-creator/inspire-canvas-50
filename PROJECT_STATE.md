@@ -10,7 +10,8 @@
 - Completed locally: Phase 14 - Admin Foundation.
 - Completed locally: Phase 15 - Media Foundation.
 - Completed locally: Phase 16 - Premium.
-- Next phase: Phase 17 - Polish & Launch Readiness.
+- Completed locally: Phase 17 - Polish & Launch Readiness.
+- Next phase: Phase 18 - Live Supabase verification and deployment readiness.
 
 ## Booking Foundation
 
@@ -25,10 +26,10 @@ Implemented locally:
 
 ## Verification
 
-- TypeScript: payment files pass; the full check is blocked by the pre-existing duplicate `get_public_services` declaration in generated types.
-- ESLint: passed.
-- Production build: passed.
-- Live database: not verified.
+- TypeScript: `npx tsc --noEmit` passed after Phase 17.
+- ESLint: `npm run lint` remains blocked by 674 Prettier errors and 17 warnings in untouched baseline files; all Phase 17 files were formatted and lint-clean.
+- Production build: `npm run build` passed (Vite client and SSR bundles; existing TanStack `inputValidator()` deprecation and config-plugin notices remain).
+- Live database: not verified; the configured remote Supabase project is inaccessible from this environment.
 - Booking migration: created locally, not applied.
 - Generated Supabase types: not regenerated because access to the target project is unavailable.
 
@@ -137,6 +138,30 @@ Not implemented or verified:
 
 - Live billing provider credentials, webhook processing, customer portal, invoices, or real credit card checkout.
 - Live database migration or remote generated type regeneration (pending target Supabase project access).
+
+## Polish & Launch Readiness
+
+Implemented locally:
+
+- Added pricing to desktop navigation and expanded mobile navigation to include organizations, plans, and contact while preserving the existing navigation destinations.
+- Tightened desktop navbar spacing and active-link styling for responsive widths.
+- Added shared Creator Settings navigation across Profile, Services, Portfolio, and Booking Requests, with a link to the public creator profile.
+- Organized the dashboard into Creator Studio, Organization, and Workspaces & Community sections with direct links to existing management pages.
+- Fixed the preview-auth request timer cleanup typing and formatted the Phase 17 files.
+- Preserved the existing application architecture and navigation changes; no generated Supabase types or migrations were changed.
+
+Verification:
+
+- `npx tsc --noEmit`: passed.
+- `npm run lint`: failed on 674 Prettier errors and 17 warnings in untouched baseline files. The files changed for Phase 17 are lint-clean.
+- `npm run build`: passed for both client and server output. Existing TanStack `inputValidator()` deprecation and Vite config-plugin notices remain.
+- `git diff --check`: passed.
+
+Known live Supabase blockers:
+
+- Community, requester/creator Bookings, and Collaborations currently encounter runtime errors against the live application data path.
+- The remote project is inaccessible from this environment, so its migration history and schema cannot be checked. Missing or unapplied remote migrations may explain these runtime errors; this remains unconfirmed.
+- Do not resolve these live errors by blindly changing migrations or applying migrations until access is restored and remote history/schema are inspected.
 
 ## Required Before Applying Booking
 

@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/common/page-header";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { CreatorSettingsNav } from "@/components/creator/creator-settings-nav";
 import {
   CreatorProfileForm,
   EMPTY_LINKS,
@@ -111,20 +112,17 @@ function CreatorProfileSettingsPage() {
             : "Keep your creative identity, skills and availability up to date."
         }
         actions={
-          existing && username ? (
-            <div className="flex flex-wrap gap-2">
-              <Link to="/creators/$username" params={{ username }}>
-                <Button variant="outline">View public profile</Button>
-              </Link>
-              <Link to="/settings/creator/bookings">
-                <Button variant="outline">Booking requests</Button>
-              </Link>
-            </div>
-          ) : null
+          <div className="flex flex-wrap gap-2">
+            <Link to="/dashboard">
+              <Button variant="outline">Back to dashboard</Button>
+            </Link>
+          </div>
         }
       />
 
-      <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto w-full max-w-3xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        {existing ? <CreatorSettingsNav currentTab="profile" publicUsername={username} /> : null}
+
         {loading ? (
           <div className="space-y-4">
             <Skeleton className="h-48 w-full rounded-xl" />

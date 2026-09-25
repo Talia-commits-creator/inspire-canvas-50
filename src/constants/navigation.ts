@@ -11,17 +11,21 @@ export const PRIMARY_NAV = [
   { to: "/organizations", label: "Organizations" },
   { to: "/projects", label: "Projects" },
   { to: "/community", label: "Community" },
+  { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
-/* Mobile keeps only the highest-value destinations */
+/* Mobile keeps comprehensive, highest-value destinations */
 export const MOBILE_NAV = [
   { to: "/discover", label: "Discover" },
   { to: "/creators", label: "Creators" },
+  { to: "/organizations", label: "Organizations" },
   { to: "/projects", label: "Projects" },
   { to: "/community", label: "Community" },
+  { to: "/pricing", label: "Plans & Pricing" },
   { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export const FOOTER_GROUPS = [

@@ -43,8 +43,10 @@ import {
   useUpdatePortfolioItem,
 } from "@/hooks/use-portfolio";
 import { useAuth } from "@/hooks/use-auth";
+import { useProfile } from "@/hooks/use-profile";
 import { useMySubscription } from "@/hooks/use-premium";
 import { UpgradePrompt } from "@/components/premium/upgrade-prompt";
+import { CreatorSettingsNav } from "@/components/creator/creator-settings-nav";
 import { PORTFOLIO_LIMITS, portfolioErrorMessage, type PortfolioItem } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/_authenticated/settings/creator_/portfolio")({
@@ -64,6 +66,8 @@ export const Route = createFileRoute("/_authenticated/settings/creator_/portfoli
 
 function PortfolioSettingsPage() {
   const { user } = useAuth();
+  const profileQuery = useProfile();
+  const username = profileQuery.data?.username;
   const creatorQuery = useMyCreatorProfile();
   const creatorProfileId = creatorQuery.data?.profile.id;
   const categoriesQuery = usePortfolioCategories();
@@ -230,6 +234,10 @@ function PortfolioSettingsPage() {
       />
 
       <div className="mx-auto w-full max-w-5xl space-y-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        {creatorProfileId ? (
+          <CreatorSettingsNav currentTab="portfolio" publicUsername={username} />
+        ) : null}
+
         {loading ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[0, 1, 2].map((index) => (
