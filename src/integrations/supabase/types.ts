@@ -14,6 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          created_at: string
+          creator_id: string
+          id: string
+          message: string
+          requester_id: string
+          service_id: string
+          status: Database["public"]["Enums"]["booking_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          id?: string
+          message: string
+          requester_id: string
+          service_id: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          id?: string
+          message?: string
+          requester_id?: string
+          service_id?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_posts: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          status: Database["public"]["Enums"]["community_post_status"]
+          title: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["community_post_visibility"]
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          status?: Database["public"]["Enums"]["community_post_status"]
+          title: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["community_post_visibility"]
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          status?: Database["public"]["Enums"]["community_post_status"]
+          title?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["community_post_visibility"]
+        }
+        Relationships: []
+      }
       creative_categories: {
         Row: {
           created_at: string
@@ -480,6 +554,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_booking: {
+        Args: { _message: string; _service_id: string }
+        Returns: {
+          created_at: string
+          creator_id: string
+          id: string
+          message: string
+          requester_id: string
+          service_id: string
+          status: Database["public"]["Enums"]["booking_status"]
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "bookings"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       generate_username: { Args: { _seed: string }; Returns: string }
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
       get_public_organization: { Args: { _slug: string }; Returns: Json }
@@ -505,11 +598,15 @@ export type Database = {
         Returns: boolean
       }
       is_username_available: { Args: { _username: string }; Returns: boolean }
+      list_community_posts: { Args: { _limit?: number }; Returns: Json }
       list_public_creators: { Args: { _limit?: number }; Returns: Json }
       list_public_organizations: { Args: { _limit?: number }; Returns: Json }
     }
     Enums: {
       app_role: "creator" | "client" | "organization" | "admin"
+      booking_status: "pending" | "accepted" | "rejected"
+      community_post_status: "draft" | "published" | "archived"
+      community_post_visibility: "public" | "private"
       creator_availability: "available" | "limited" | "unavailable"
       creator_experience:
         | "beginner"
@@ -648,6 +745,9 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["creator", "client", "organization", "admin"],
+      booking_status: ["pending", "accepted", "rejected"],
+      community_post_status: ["draft", "published", "archived"],
+      community_post_visibility: ["public", "private"],
       creator_availability: ["available", "limited", "unavailable"],
       creator_experience: [
         "beginner",
