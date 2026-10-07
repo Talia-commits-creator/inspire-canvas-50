@@ -13,9 +13,9 @@ export const Route = createFileRoute("/reset-password")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Set a new password — Inspire to Aspire" },
-      { name: "description", content: "Choose a new password for your Inspire to Aspire account." },
-      { property: "og:title", content: "Set a new password — Inspire to Aspire" },
+      { title: "Set a new password — DAREY CREATIVES" },
+      { name: "description", content: "Choose a new password for your DAREY CREATIVES account." },
+      { property: "og:title", content: "Set a new password — DAREY CREATIVES" },
       { property: "og:description", content: "Choose a new password for your account." },
     ],
   }),
@@ -79,7 +79,10 @@ function ResetPasswordPage() {
 
   if (status === "checking") {
     return (
-      <AuthShell title="Checking your link" description="One moment while we verify your reset link.">
+      <AuthShell
+        title="Checking your link"
+        description="One moment while we verify your reset link."
+      >
         <div className="h-2 w-full animate-pulse rounded-md bg-secondary" />
       </AuthShell>
     );

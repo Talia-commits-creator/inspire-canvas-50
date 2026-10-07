@@ -5,12 +5,13 @@ import { PageHeader } from "@/components/common/page-header";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Inspire to Aspire" },
-      { name: "description", content: "Learn about the mission behind Inspire to Aspire." },
-      { property: "og:title", content: "About — Inspire to Aspire" },
+      { title: "About — DAREY CREATIVES" },
+      { name: "description", content: "Learn about the mission behind DAREY CREATIVES." },
+      { property: "og:title", content: "About — DAREY CREATIVES" },
       {
         property: "og:description",
-        content: "Our mission: connecting talent, opportunities, and communities.",
+        content:
+          "Inspire to Aspire — Connecting Talent. Creating Opportunities. Inspiring Communities.",
       },
     ],
   }),
@@ -23,7 +24,7 @@ function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="A place for creative people to find each other"
-        description="Inspire to Aspire exists to connect creators, clients, organizations, and communities through a fair, transparent, and inspiring platform."
+        description="DAREY CREATIVES is built on our core mission: Inspire to Aspire — connecting talent, creating opportunities, and inspiring communities through a fair, transparent, and collaborative platform."
       />
       <section className="mx-auto grid w-full max-w-5xl gap-5 px-4 py-8 sm:px-6 sm:py-12 md:grid-cols-3 lg:px-8">
         <article className="rounded-3xl border border-border/70 bg-card p-6">

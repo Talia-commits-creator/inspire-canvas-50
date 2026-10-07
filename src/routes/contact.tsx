@@ -6,9 +6,9 @@ import { SiteLayout } from "@/components/layout/site-layout";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Inspire to Aspire" },
-      { name: "description", content: "Get in touch with the Inspire to Aspire team." },
-      { property: "og:title", content: "Contact — Inspire to Aspire" },
+      { title: "Contact — DAREY CREATIVES" },
+      { name: "description", content: "Get in touch with the DAREY CREATIVES team." },
+      { property: "og:title", content: "Contact — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Reach out with questions, partnerships, or press inquiries.",

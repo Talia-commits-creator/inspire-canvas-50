@@ -39,8 +39,8 @@ import { communityErrorMessage, type CommunityPost } from "@/lib/community";
 export const Route = createFileRoute("/_authenticated/settings/community")({
   head: () => ({
     meta: [
-      { title: "My community posts — Inspire to Aspire" },
-      { name: "description", content: "Create and manage your Inspire to Aspire community posts." },
+      { title: "My community posts — DAREY CREATIVES" },
+      { name: "description", content: "Create and manage your DAREY CREATIVES community posts." },
     ],
   }),
   component: CommunitySettingsPage,

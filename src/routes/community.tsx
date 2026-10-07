@@ -26,12 +26,12 @@ import { communityErrorMessage } from "@/lib/community";
 export const Route = createFileRoute("/community")({
   head: () => ({
     meta: [
-      { title: "Community — Inspire to Aspire" },
+      { title: "Community — DAREY CREATIVES" },
       {
         name: "description",
         content: "Join conversations, groups, and events across the community.",
       },
-      { property: "og:title", content: "Community — Inspire to Aspire" },
+      { property: "og:title", content: "Community — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Groups, discussions, and events for creators and audiences.",

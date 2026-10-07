@@ -13,13 +13,12 @@ export const Route = createFileRoute("/organizations")({
   }),
   head: () => ({
     meta: [
-      { title: "Organizations — Inspire to Aspire" },
+      { title: "Organizations — DAREY CREATIVES" },
       {
         name: "description",
-        content:
-          "Discover organizations, institutions and creative groups across Inspire to Aspire.",
+        content: "Discover organizations, institutions and creative groups across DAREY CREATIVES.",
       },
-      { property: "og:title", content: "Organizations — Inspire to Aspire" },
+      { property: "og:title", content: "Organizations — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Creative organizations and community groups building opportunities for talent.",

@@ -19,7 +19,7 @@ export const Route = createFileRoute("/organizations/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Organization not found — Inspire to Aspire" },
+          { title: "Organization not found — DAREY CREATIVES" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -27,9 +27,9 @@ export const Route = createFileRoute("/organizations/$slug")({
     const { organization } = loaderData;
     return {
       meta: [
-        { title: `${organization.name} — Organization on Inspire to Aspire` },
+        { title: `${organization.name} — Organization on DAREY CREATIVES` },
         { name: "description", content: organization.short_description },
-        { property: "og:title", content: `${organization.name} on Inspire to Aspire` },
+        { property: "og:title", content: `${organization.name} on DAREY CREATIVES` },
         { property: "og:description", content: organization.short_description },
         { property: "og:type", content: "profile" },
       ],

@@ -64,17 +64,17 @@ import { useTheme } from "@/providers/theme-provider";
 export const Route = createFileRoute("/styleguide")({
   head: () => ({
     meta: [
-      { title: "Style Guide — Inspire to Aspire" },
+      { title: "Style Guide — DAREY CREATIVES" },
       {
         name: "description",
         content:
-          "Internal design system reference for Inspire to Aspire: typography, colour tokens, components and entity card patterns.",
+          "Internal design system reference for DAREY CREATIVES: typography, colour tokens, components and entity card patterns.",
       },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "Style Guide — Inspire to Aspire" },
+      { property: "og:title", content: "Style Guide — DAREY CREATIVES" },
       {
         property: "og:description",
-        content: "Internal reference for the Inspire to Aspire design system.",
+        content: "Internal reference for the DAREY CREATIVES design system.",
       },
     ],
   }),
@@ -140,7 +140,7 @@ function StyleGuidePage() {
       <PageHeader
         eyebrow="Internal reference"
         title="Design system style guide"
-        description="A working reference for the Inspire to Aspire visual language: tokens, primitives, and reusable content patterns."
+        description="A working reference for the DAREY CREATIVES visual language: tokens, primitives, and reusable content patterns."
         actions={
           <Button variant="outline" onClick={toggle}>
             {theme === "dark" ? <Sun /> : <Moon />}
@@ -201,8 +201,12 @@ function StyleGuidePage() {
                 <p className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
                   Hero heading
                 </p>
-                <p className="mt-4 font-display text-3xl font-semibold tracking-tight">H1 heading</p>
-                <p className="mt-3 font-display text-2xl font-semibold tracking-tight">H2 heading</p>
+                <p className="mt-4 font-display text-3xl font-semibold tracking-tight">
+                  H1 heading
+                </p>
+                <p className="mt-3 font-display text-2xl font-semibold tracking-tight">
+                  H2 heading
+                </p>
                 <p className="mt-3 font-display text-xl font-semibold tracking-tight">H3 heading</p>
               </Card>
               <Card className="p-6">
@@ -547,7 +551,9 @@ function StyleGuidePage() {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => toast.success("Profile published", { description: "Visible to everyone." })}
+                  onClick={() =>
+                    toast.success("Profile published", { description: "Visible to everyone." })
+                  }
                 >
                   Success toast
                 </Button>
@@ -683,7 +689,10 @@ function StyleGuidePage() {
                 <TabsContent value="two" className="text-sm leading-relaxed text-muted-foreground">
                   Second panel.
                 </TabsContent>
-                <TabsContent value="three" className="text-sm leading-relaxed text-muted-foreground">
+                <TabsContent
+                  value="three"
+                  className="text-sm leading-relaxed text-muted-foreground"
+                >
                   Third panel.
                 </TabsContent>
               </Tabs>

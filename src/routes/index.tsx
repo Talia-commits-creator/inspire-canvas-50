@@ -16,16 +16,17 @@ import { SITE } from "@/constants/navigation";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Inspire to Aspire — A home for creative work" },
+      { title: "DAREY CREATIVES — A home for creative work" },
       {
         name: "description",
         content:
           "A creative ecosystem where talent is discovered, opportunities take shape, and communities grow.",
       },
-      { property: "og:title", content: "Inspire to Aspire — A home for creative work" },
+      { property: "og:title", content: "DAREY CREATIVES — A home for creative work" },
       {
         property: "og:description",
-        content: "Connecting Talent. Creating Opportunities. Inspiring Communities.",
+        content:
+          "Inspire to Aspire — Connecting Talent. Creating Opportunities. Inspiring Communities.",
       },
     ],
   }),

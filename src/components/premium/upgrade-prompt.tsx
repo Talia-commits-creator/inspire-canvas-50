@@ -13,7 +13,7 @@ type UpgradePromptProps = {
 
 export function UpgradePrompt({
   title = "Unlock Creator Pro",
-  description = "Get higher capacity, verified presence, and priority discovery across Inspire to Aspire.",
+  description = "Get higher capacity, verified presence, and priority discovery across DAREY CREATIVES.",
   feature,
   ctaText = "View plans",
   compact = false,

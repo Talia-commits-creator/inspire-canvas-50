@@ -6,17 +6,29 @@ import { PageHeader } from "@/components/common/page-header";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { OrganizationForm, emptyOrganizationForm, toOrganizationInput, validateOrganizationForm, type OrganizationFormValues } from "@/components/organization/organization-form";
+import {
+  OrganizationForm,
+  emptyOrganizationForm,
+  toOrganizationInput,
+  validateOrganizationForm,
+  type OrganizationFormValues,
+} from "@/components/organization/organization-form";
 import { useMyOrganization, useSaveOrganization } from "@/hooks/use-organization";
 import { organizationErrorMessage } from "@/lib/organization";
 
 export const Route = createFileRoute("/_authenticated/settings/organization")({
   head: () => ({
     meta: [
-      { title: "Organization profile — Inspire to Aspire" },
-      { name: "description", content: "Create or update your organization profile on Inspire to Aspire." },
-      { property: "og:title", content: "Organization profile — Inspire to Aspire" },
-      { property: "og:description", content: "Establish your organization’s public identity and presence." },
+      { title: "Organization profile — DAREY CREATIVES" },
+      {
+        name: "description",
+        content: "Create or update your organization profile on DAREY CREATIVES.",
+      },
+      { property: "og:title", content: "Organization profile — DAREY CREATIVES" },
+      {
+        property: "og:description",
+        content: "Establish your organization’s public identity and presence.",
+      },
     ],
   }),
   component: OrganizationSettingsPage,

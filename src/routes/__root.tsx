@@ -73,17 +73,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Inspire to Aspire — Connecting Talent. Creating Opportunities." },
+      { title: "DAREY CREATIVES — Connecting Talent. Creating Opportunities." },
       {
         name: "description",
         content:
-          "Inspire to Aspire is a creative marketplace and media ecosystem connecting creators, clients, organizations, and audiences.",
+          "DAREY CREATIVES is a creative marketplace and media ecosystem connecting creators, clients, organizations, and audiences.",
       },
-      { name: "author", content: "Inspire to Aspire" },
-      { property: "og:title", content: "Inspire to Aspire" },
+      { name: "author", content: "DAREY CREATIVES" },
+      { property: "og:title", content: "DAREY CREATIVES" },
       {
         property: "og:description",
-        content: "Connecting Talent. Creating Opportunities. Inspiring Communities.",
+        content:
+          "Inspire to Aspire — Connecting Talent. Creating Opportunities. Inspiring Communities.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

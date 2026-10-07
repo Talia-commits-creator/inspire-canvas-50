@@ -14,7 +14,13 @@ export type MediaSource = {
  * Compact, non-autoplaying preview used inside cards. Heavy media is never
  * loaded here: video and audio show a poster or a quiet placeholder instead.
  */
-export function PortfolioPreview({ source, className }: { source: MediaSource; className?: string }) {
+export function PortfolioPreview({
+  source,
+  className,
+}: {
+  source: MediaSource;
+  className?: string;
+}) {
   const { mediaType, mediaUrl, thumbnailUrl, externalUrl, title } = source;
   const poster = thumbnailUrl ?? (mediaType === "image" ? mediaUrl : null);
 
@@ -31,7 +37,9 @@ export function PortfolioPreview({ source, className }: { source: MediaSource; c
       ) : (
         <div className="photo-placeholder grid h-full w-full place-items-center px-4 text-center">
           <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            {mediaType === "link" && externalUrl ? hostnameOf(externalUrl) : MEDIA_TYPE_LABELS[mediaType]}
+            {mediaType === "link" && externalUrl
+              ? hostnameOf(externalUrl)
+              : MEDIA_TYPE_LABELS[mediaType]}
           </span>
         </div>
       )}
@@ -83,7 +91,7 @@ export function PortfolioPlayer({ source }: { source: MediaSource }) {
         className="max-h-[60vh] w-full rounded-lg bg-secondary"
         aria-label={`Video: ${title}`}
       >
-          <source src={mediaUrl} />
+        <source src={mediaUrl} />
         Your browser cannot play this video.
       </video>
     );
@@ -112,7 +120,7 @@ export function PortfolioPlayer({ source }: { source: MediaSource }) {
     return (
       <div className="rounded-lg border border-border bg-secondary/50 p-4">
         <p className="text-sm text-muted-foreground">
-          This work lives on another site. Opening it will take you away from Inspire to Aspire.
+          This work lives on another site. Opening it will take you away from DAREY CREATIVES.
         </p>
         <a
           href={externalUrl}

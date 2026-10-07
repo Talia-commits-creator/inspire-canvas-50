@@ -27,7 +27,7 @@ import {
 export const Route = createFileRoute("/_authenticated/settings/creator_/bookings")({
   head: () => ({
     meta: [
-      { title: "Booking requests — Inspire to Aspire" },
+      { title: "Booking requests — DAREY CREATIVES" },
       { name: "description", content: "Review booking requests for your creator services." },
     ],
   }),

@@ -1,7 +1,8 @@
 export const SITE = {
-  name: "Inspire to Aspire",
-  short: "I2A",
-  tagline: "Connecting Talent. Creating Opportunities. Inspiring Communities.",
+  name: "DAREY CREATIVES",
+  short: "DC",
+  tagline: "Inspire to Aspire — Connecting Talent. Creating Opportunities. Inspiring Communities.",
+  mission: "Inspire to Aspire — Connecting Talent. Creating Opportunities. Inspiring Communities.",
 } as const;
 
 export const PRIMARY_NAV = [

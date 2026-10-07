@@ -12,10 +12,13 @@ import { AUTH_MESSAGES, authErrorMessage, isValidEmail } from "@/lib/auth-utils"
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Create account — Inspire to Aspire" },
-      { name: "description", content: "Create your Inspire to Aspire account with email and password." },
-      { property: "og:title", content: "Create account — Inspire to Aspire" },
-      { property: "og:description", content: "Join Inspire to Aspire." },
+      { title: "Create account — DAREY CREATIVES" },
+      {
+        name: "description",
+        content: "Create your DAREY CREATIVES account with email and password.",
+      },
+      { property: "og:title", content: "Create account — DAREY CREATIVES" },
+      { property: "og:description", content: "Join DAREY CREATIVES." },
     ],
   }),
   component: RegisterPage,

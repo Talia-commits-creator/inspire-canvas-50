@@ -27,10 +27,13 @@ import {
 export const Route = createFileRoute("/_authenticated/settings/profile")({
   head: () => ({
     meta: [
-      { title: "Edit profile — Inspire to Aspire" },
-      { name: "description", content: "Update your display name, username, photo and bio on Inspire to Aspire." },
-      { property: "og:title", content: "Edit profile — Inspire to Aspire" },
-      { property: "og:description", content: "Manage how you are represented on Inspire to Aspire." },
+      { title: "Edit profile — DAREY CREATIVES" },
+      {
+        name: "description",
+        content: "Update your display name, username, photo and bio on DAREY CREATIVES.",
+      },
+      { property: "og:title", content: "Edit profile — DAREY CREATIVES" },
+      { property: "og:description", content: "Manage how you are represented on DAREY CREATIVES." },
     ],
   }),
   component: EditProfilePage,
@@ -115,7 +118,7 @@ function EditProfilePage() {
       <PageHeader
         eyebrow="Account"
         title="Edit profile"
-        description="This is how you appear across Inspire to Aspire. Your email stays private."
+        description="This is how you appear across DAREY CREATIVES. Your email stays private."
         actions={
           <Link to="/dashboard">
             <Button variant="outline">Back to dashboard</Button>
@@ -143,7 +146,9 @@ function EditProfilePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="font-display text-xl">Profile photo</CardTitle>
-                <CardDescription>Uploaded to your own private folder and shown on your profile.</CardDescription>
+                <CardDescription>
+                  Uploaded to your own private folder and shown on your profile.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <AvatarUploader
@@ -199,7 +204,9 @@ function EditProfilePage() {
                   <p className="text-xs text-muted-foreground">
                     3–30 characters. Letters, numbers, hyphens and underscores.
                   </p>
-                  {errors.username ? <p className="text-sm text-destructive">{errors.username}</p> : null}
+                  {errors.username ? (
+                    <p className="text-sm text-destructive">{errors.username}</p>
+                  ) : null}
                 </div>
 
                 <div className="space-y-2">
@@ -228,8 +235,12 @@ function EditProfilePage() {
                     aria-invalid={Boolean(errors.location)}
                     onChange={(e) => set("location", e.target.value)}
                   />
-                  <p className="text-xs text-muted-foreground">General area only — no street addresses.</p>
-                  {errors.location ? <p className="text-sm text-destructive">{errors.location}</p> : null}
+                  <p className="text-xs text-muted-foreground">
+                    General area only — no street addresses.
+                  </p>
+                  {errors.location ? (
+                    <p className="text-sm text-destructive">{errors.location}</p>
+                  ) : null}
                 </div>
 
                 <div className="space-y-2">
@@ -243,7 +254,9 @@ function EditProfilePage() {
                     aria-invalid={Boolean(errors.website)}
                     onChange={(e) => set("website", e.target.value)}
                   />
-                  {errors.website ? <p className="text-sm text-destructive">{errors.website}</p> : null}
+                  {errors.website ? (
+                    <p className="text-sm text-destructive">{errors.website}</p>
+                  ) : null}
                 </div>
               </CardContent>
             </Card>
@@ -252,7 +265,11 @@ function EditProfilePage() {
               <Button type="submit" className="w-full sm:w-auto" disabled={update.isPending}>
                 {update.isPending ? "Saving…" : "Save changes"}
               </Button>
-              <Link to="/profile/$username" params={{ username: profile.username }} className="w-full sm:w-auto">
+              <Link
+                to="/profile/$username"
+                params={{ username: profile.username }}
+                className="w-full sm:w-auto"
+              >
                 <Button type="button" variant="outline" className="w-full">
                   View public profile
                 </Button>

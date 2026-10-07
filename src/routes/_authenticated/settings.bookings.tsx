@@ -24,8 +24,8 @@ import {
 export const Route = createFileRoute("/_authenticated/settings/bookings")({
   head: () => ({
     meta: [
-      { title: "My booking requests — Inspire to Aspire" },
-      { name: "description", content: "Track your requests to creators on Inspire to Aspire." },
+      { title: "My booking requests — DAREY CREATIVES" },
+      { name: "description", content: "Track your requests to creators on DAREY CREATIVES." },
     ],
   }),
   component: MyBookingsPage,

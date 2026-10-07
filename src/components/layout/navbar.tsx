@@ -9,7 +9,7 @@ import { PRIMARY_NAV, MOBILE_NAV, SITE } from "@/constants/navigation";
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
-  const { session, loading, signOut } = useAuth();
+  const { session, user, loading, signOut } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
@@ -67,7 +67,7 @@ export function Navbar() {
           <div className="hidden items-center gap-2 sm:flex">
             {loading ? (
               <div className="h-8 w-32 animate-pulse rounded-lg bg-secondary" aria-hidden />
-            ) : session ? (
+            ) : session && user ? (
               <>
                 <Link to="/dashboard">
                   <Button variant="ghost" size="sm">
@@ -86,7 +86,7 @@ export function Navbar() {
                   </Button>
                 </Link>
                 <Link to="/register">
-                  <Button size="sm">Join</Button>
+                  <Button size="sm">Join Now</Button>
                 </Link>
               </>
             )}
@@ -120,7 +120,12 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border pt-3">
-              {session ? (
+              {loading ? (
+                <div
+                  className="col-span-2 h-10 w-full animate-pulse rounded-md bg-secondary"
+                  aria-hidden
+                />
+              ) : session && user ? (
                 <>
                   <Link to="/dashboard" onClick={() => setOpen(false)}>
                     <Button variant="outline" className="w-full">
@@ -139,7 +144,7 @@ export function Navbar() {
                     </Button>
                   </Link>
                   <Link to="/register" onClick={() => setOpen(false)}>
-                    <Button className="w-full">Join</Button>
+                    <Button className="w-full">Join Now</Button>
                   </Link>
                 </>
               )}

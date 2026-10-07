@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Info, Sparkles, CheckCircle2 } from "lucide-react";
+import { Info, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
 import { PlanCard } from "@/components/premium/plan-card";
@@ -18,12 +18,12 @@ import { useSubscriptionPlans, useMySubscription } from "@/hooks/use-premium";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Plans & Pricing — Inspire to Aspire" },
+      { title: "Plans & Pricing — DAREY CREATIVES" },
       {
         name: "description",
-        content: "Explore subscription plans for creators and organizations on Inspire to Aspire.",
+        content: "Explore subscription plans for creators and organizations on DAREY CREATIVES.",
       },
-      { property: "og:title", content: "Plans & Pricing — Inspire to Aspire" },
+      { property: "og:title", content: "Plans & Pricing — DAREY CREATIVES" },
       {
         property: "og:description",
         content:
@@ -52,7 +52,14 @@ function PricingPage() {
       <PageHeader
         eyebrow="Membership & Tiers"
         title="Simple, transparent plans for every stage"
-        description="Whether you are starting your creative journey or running an established organization, Inspire to Aspire gives you the tools to create, collaborate, and grow."
+        description="Whether you are starting your creative journey or running an established organization, DAREY CREATIVES gives you the tools to create, collaborate, and grow."
+        actions={
+          <Link to="/register">
+            <Button size="lg" className="gap-2 font-semibold shadow-sm">
+              JOIN NOW <ArrowRight className="size-4" aria-hidden />
+            </Button>
+          </Link>
+        }
       />
 
       <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 space-y-12">
@@ -63,7 +70,7 @@ function PricingPage() {
             Platform Preview: Core Features are Free
           </AlertTitle>
           <AlertDescription className="text-sm text-muted-foreground mt-1">
-            Inspire to Aspire is currently in its preview foundation stage. Profiles, service
+            DAREY CREATIVES is currently in its preview foundation stage. Profiles, service
             listings, community participation, and bookings are completely free. Production billing
             provider integration is in progress and will enable seamless automated upgrades in an
             upcoming phase.
@@ -159,14 +166,14 @@ function PricingPage() {
               Frequently Asked Questions
             </h2>
             <p className="text-sm text-muted-foreground">
-              Everything you need to know about Inspire to Aspire tiers and memberships.
+              Everything you need to know about DAREY CREATIVES tiers and memberships.
             </p>
           </div>
 
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-left font-medium">
-                Can I use Inspire to Aspire for free?
+                Can I use DAREY CREATIVES for free?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
                 Yes! Our Free Community tier lets you create your universal profile, publish a

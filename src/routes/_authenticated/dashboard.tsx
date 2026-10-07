@@ -29,9 +29,9 @@ import { PROFILE_FIELD_LABELS, initialsFrom, profileCompletion } from "@/lib/pro
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Inspire to Aspire" },
-      { name: "description", content: "Your account home on Inspire to Aspire." },
-      { property: "og:title", content: "Dashboard — Inspire to Aspire" },
+      { title: "Dashboard — DAREY CREATIVES" },
+      { name: "description", content: "Your account home on DAREY CREATIVES." },
+      { property: "og:title", content: "Dashboard — DAREY CREATIVES" },
       { property: "og:description", content: "Your profile summary and account settings." },
     ],
   }),

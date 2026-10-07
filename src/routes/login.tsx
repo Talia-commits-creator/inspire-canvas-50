@@ -11,14 +11,14 @@ import { AUTH_MESSAGES, authErrorMessage, isValidEmail, safeRedirect } from "@/l
 
 export const Route = createFileRoute("/login")({
   validateSearch: (search: Record<string, unknown>): { redirect?: string } =>
-    typeof search['redirect'] === "string" ? { redirect: search['redirect'] } : {},
+    typeof search["redirect"] === "string" ? { redirect: search["redirect"] } : {},
 
   head: () => ({
     meta: [
-      { title: "Log in — Inspire to Aspire" },
-      { name: "description", content: "Sign in to your Inspire to Aspire account." },
-      { property: "og:title", content: "Log in — Inspire to Aspire" },
-      { property: "og:description", content: "Sign in to your Inspire to Aspire account." },
+      { title: "Log in — DAREY CREATIVES" },
+      { name: "description", content: "Sign in to your DAREY CREATIVES account." },
+      { property: "og:title", content: "Log in — DAREY CREATIVES" },
+      { property: "og:description", content: "Sign in to your DAREY CREATIVES account." },
     ],
   }),
   component: LoginPage,
@@ -70,7 +70,7 @@ function LoginPage() {
     <AuthShell
       eyebrow="Account"
       title="Welcome back"
-      description="Sign in to continue to Inspire to Aspire."
+      description="Sign in to continue to DAREY CREATIVES."
       footer={
         <>
           New here? <AuthLink to="/register">Create an account</AuthLink>

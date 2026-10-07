@@ -14,12 +14,12 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/discover")({
   head: () => ({
     meta: [
-      { title: "Discover — Inspire to Aspire" },
+      { title: "Discover — DAREY CREATIVES" },
       {
         name: "description",
-        content: "Find creators, organizations, services, and community across Inspire to Aspire.",
+        content: "Find creators, organizations, services, and community across DAREY CREATIVES.",
       },
-      { property: "og:title", content: "Discover — Inspire to Aspire" },
+      { property: "og:title", content: "Discover — DAREY CREATIVES" },
       { property: "og:description", content: "Explore talent, work, and creative communities." },
     ],
   }),

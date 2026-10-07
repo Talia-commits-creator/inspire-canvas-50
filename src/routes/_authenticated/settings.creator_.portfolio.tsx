@@ -52,12 +52,12 @@ import { PORTFOLIO_LIMITS, portfolioErrorMessage, type PortfolioItem } from "@/l
 export const Route = createFileRoute("/_authenticated/settings/creator_/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — Inspire to Aspire" },
+      { title: "Portfolio — DAREY CREATIVES" },
       {
         name: "description",
         content: "Add, edit and order the work shown on your public creator profile.",
       },
-      { property: "og:title", content: "Portfolio — Inspire to Aspire" },
+      { property: "og:title", content: "Portfolio — DAREY CREATIVES" },
       { property: "og:description", content: "Showcase the work you've actually made." },
     ],
   }),

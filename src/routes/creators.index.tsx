@@ -11,13 +11,13 @@ export const Route = createFileRoute("/creators/")({
   loader: async () => ({ creators: (await listPublicCreators()) as CreatorListItem[] }),
   head: () => ({
     meta: [
-      { title: "Creators — Inspire to Aspire" },
+      { title: "Creators — DAREY CREATIVES" },
       {
         name: "description",
         content:
-          "Meet the creators on Inspire to Aspire: DJs, photographers, producers, writers and more.",
+          "Meet the creators on DAREY CREATIVES: DJs, photographers, producers, writers and more.",
       },
-      { property: "og:title", content: "Creators — Inspire to Aspire" },
+      { property: "og:title", content: "Creators — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Creative identities, disciplines and skills from creators across the community.",

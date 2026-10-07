@@ -48,12 +48,12 @@ import { SERVICE_LIMITS, serviceErrorMessage, type Service } from "@/lib/service
 export const Route = createFileRoute("/_authenticated/settings/creator_/services")({
   head: () => ({
     meta: [
-      { title: "Services — Inspire to Aspire" },
+      { title: "Services — DAREY CREATIVES" },
       {
         name: "description",
         content: "Add, edit and order the creative services shown on your public creator profile.",
       },
-      { property: "og:title", content: "Services — Inspire to Aspire" },
+      { property: "og:title", content: "Services — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Showcase the creative services you can offer to clients and collaborators.",

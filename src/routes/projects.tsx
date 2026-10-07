@@ -1,19 +1,18 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BriefcaseBusiness, CircleCheck, Handshake } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { BriefcaseBusiness, CircleCheck, Handshake } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
-import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects & opportunities — Inspire to Aspire" },
+      { title: "Projects & opportunities — DAREY CREATIVES" },
       {
         name: "description",
         content:
           "Explore creative services and learn how booking requests can become collaborations.",
       },
-      { property: "og:title", content: "Projects & opportunities — Inspire to Aspire" },
+      { property: "og:title", content: "Projects & opportunities — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Find creative services and make the next connection.",
@@ -30,13 +29,6 @@ function ProjectsPage() {
         eyebrow="Work in motion"
         title="Find the people for your next idea"
         description="Explore creator services, make a booking request, and start a shared workspace when a request is accepted."
-        actions={
-          <Link to="/creators">
-            <Button>
-              Explore creators <ArrowRight aria-hidden />
-            </Button>
-          </Link>
-        }
       />
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <div className="grid gap-4 md:grid-cols-3">
@@ -91,9 +83,6 @@ function ProjectsPage() {
               Availability and listings depend on what each creator has published.
             </p>
           </div>
-          <Link to="/creators">
-            <Button className="shrink-0">Browse creator profiles</Button>
-          </Link>
         </div>
       </section>
     </SiteLayout>

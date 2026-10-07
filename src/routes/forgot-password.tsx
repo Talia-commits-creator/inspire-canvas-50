@@ -11,9 +11,12 @@ import { AUTH_MESSAGES, authErrorMessage, isValidEmail } from "@/lib/auth-utils"
 export const Route = createFileRoute("/forgot-password")({
   head: () => ({
     meta: [
-      { title: "Reset your password — Inspire to Aspire" },
-      { name: "description", content: "Request a password reset link for your Inspire to Aspire account." },
-      { property: "og:title", content: "Reset your password — Inspire to Aspire" },
+      { title: "Reset your password — DAREY CREATIVES" },
+      {
+        name: "description",
+        content: "Request a password reset link for your DAREY CREATIVES account.",
+      },
+      { property: "og:title", content: "Reset your password — DAREY CREATIVES" },
       { property: "og:description", content: "Request a password reset link." },
     ],
   }),
@@ -59,8 +62,8 @@ function ForgotPasswordPage() {
         footer={<AuthLink to="/login">Back to log in</AuthLink>}
       >
         <p className="text-sm text-muted-foreground">
-          The link expires after a short time. If it doesn't arrive, check your spam folder and
-          try again.
+          The link expires after a short time. If it doesn't arrive, check your spam folder and try
+          again.
         </p>
       </AuthShell>
     );

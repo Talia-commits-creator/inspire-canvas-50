@@ -17,19 +17,18 @@ export const Route = createFileRoute("/profile/$username")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Profile not found — Inspire to Aspire" },
+          { title: "Profile not found — DAREY CREATIVES" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const name = loaderData.profile.display_name ?? loaderData.profile.username;
-    const description =
-      loaderData.profile.bio?.slice(0, 150) ?? `${name} on Inspire to Aspire.`;
+    const description = loaderData.profile.bio?.slice(0, 150) ?? `${name} on DAREY CREATIVES.`;
     return {
       meta: [
-        { title: `${name} (@${loaderData.profile.username}) — Inspire to Aspire` },
+        { title: `${name} (@${loaderData.profile.username}) — DAREY CREATIVES` },
         { name: "description", content: description },
-        { property: "og:title", content: `${name} on Inspire to Aspire` },
+        { property: "og:title", content: `${name} on DAREY CREATIVES` },
         { property: "og:description", content: description },
         { property: "og:type", content: "profile" },
         { name: "twitter:card", content: "summary" },
@@ -38,7 +37,11 @@ export const Route = createFileRoute("/profile/$username")({
   },
   errorComponent: () => (
     <SiteLayout>
-      <PageHeader eyebrow="Profile" title="Something went wrong" description="We couldn't load this profile." />
+      <PageHeader
+        eyebrow="Profile"
+        title="Something went wrong"
+        description="We couldn't load this profile."
+      />
     </SiteLayout>
   ),
   notFoundComponent: () => (
@@ -46,7 +49,7 @@ export const Route = createFileRoute("/profile/$username")({
       <PageHeader
         eyebrow="Profile"
         title="Profile not found"
-        description="No one on Inspire to Aspire uses that username."
+        description="No one on DAREY CREATIVES uses that username."
         actions={
           <Link to="/creators">
             <Button variant="outline">Browse creators</Button>
@@ -91,7 +94,9 @@ function PublicProfilePage() {
             </div>
 
             {profile.bio ? (
-              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{profile.bio}</p>
+              <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+                {profile.bio}
+              </p>
             ) : null}
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">

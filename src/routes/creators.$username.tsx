@@ -59,7 +59,7 @@ export const Route = createFileRoute("/creators/$username")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Creator not found — Inspire to Aspire" },
+          { title: "Creator not found — DAREY CREATIVES" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -73,9 +73,9 @@ export const Route = createFileRoute("/creators/$username")({
     const description = profile.creator.headline;
     return {
       meta: [
-        { title: `${name} — Creator on Inspire to Aspire` },
+        { title: `${name} — Creator on DAREY CREATIVES` },
         { name: "description", content: description },
-        { property: "og:title", content: `${name} on Inspire to Aspire` },
+        { property: "og:title", content: `${name} on DAREY CREATIVES` },
         { property: "og:description", content: description },
         { property: "og:type", content: "profile" },
         { name: "twitter:card", content: "summary" },

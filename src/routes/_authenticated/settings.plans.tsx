@@ -13,7 +13,7 @@ import { SUBSCRIPTION_STATUS_LABELS } from "@/lib/premium";
 export const Route = createFileRoute("/_authenticated/settings/plans")({
   head: () => ({
     meta: [
-      { title: "Subscription & Plans — Inspire to Aspire" },
+      { title: "Subscription & Plans — DAREY CREATIVES" },
       {
         name: "description",
         content: "Manage your membership plan and explore available entitlements.",
@@ -69,7 +69,7 @@ function PlansSettingsPage() {
                     </Badge>
                   </div>
                   <CardDescription className="text-xs text-muted-foreground">
-                    Your current membership tier on Inspire to Aspire.
+                    Your current membership tier on DAREY CREATIVES.
                   </CardDescription>
                 </div>
 

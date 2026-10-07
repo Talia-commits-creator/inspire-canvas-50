@@ -26,12 +26,12 @@ import { creatorErrorMessage, LINK_PLATFORMS, type LinkPlatform } from "@/lib/cr
 export const Route = createFileRoute("/_authenticated/settings/creator")({
   head: () => ({
     meta: [
-      { title: "Creator profile — Inspire to Aspire" },
+      { title: "Creator profile — DAREY CREATIVES" },
       {
         name: "description",
         content: "Set up your creative identity, categories, skills and availability as a creator.",
       },
-      { property: "og:title", content: "Creator profile — Inspire to Aspire" },
+      { property: "og:title", content: "Creator profile — DAREY CREATIVES" },
       {
         property: "og:description",
         content: "Define what you create and how people can work with you.",
