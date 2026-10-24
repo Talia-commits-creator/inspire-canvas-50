@@ -169,21 +169,18 @@ function StyleGuidePage() {
           <Section id="brand" title="Brand" description="Wordmark, voice, and core palette.">
             <div className="grid gap-6 lg:grid-cols-2">
               <Card className="p-6">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-primary font-display text-base font-semibold text-primary-foreground">
-                    {SITE.short}
-                  </span>
-                  <span className="font-display text-2xl font-semibold tracking-tight">
-                    {SITE.name}
-                  </span>
-                </div>
+                <img
+                  src="/images/darey-creatives-logo.png"
+                  alt="DAREY CREATIVES"
+                  className="h-28 w-28 object-contain"
+                />
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{SITE.tagline}</p>
               </Card>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <Swatch name="Primary teal" className="bg-primary" />
-                <Swatch name="Warm gold" className="bg-gold" />
-                <Swatch name="Soft coral" className="bg-coral" />
-                <Swatch name="Background" className="bg-background" />
+                <Swatch name="Orange" className="bg-primary" />
+                <Swatch name="Soft sand" className="bg-gold" />
+                <Swatch name="Warm off-white" className="bg-background" />
+                <Swatch name="Charcoal" className="bg-foreground" />
               </div>
             </div>
           </Section>
@@ -248,8 +245,8 @@ function StyleGuidePage() {
               <Swatch name="primary" className="bg-primary" />
               <Swatch name="primary-foreground" className="bg-primary-foreground" />
               <Swatch name="accent" className="bg-accent" />
-              <Swatch name="gold" className="bg-gold" />
-              <Swatch name="coral" className="bg-coral" />
+              <Swatch name="soft sand" className="bg-gold" />
+              <Swatch name="orange" className="bg-coral" />
               <Swatch name="success" className="bg-success" />
               <Swatch name="destructive" className="bg-destructive" />
               <Swatch name="border" className="bg-border" />

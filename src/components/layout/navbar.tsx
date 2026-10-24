@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/providers/theme-provider";
 import { useAuth } from "@/hooks/use-auth";
-import { PRIMARY_NAV, MOBILE_NAV, SITE } from "@/constants/navigation";
+import { PRIMARY_NAV, MOBILE_NAV } from "@/constants/navigation";
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
@@ -28,16 +28,17 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-[#E8E1D8]/20 bg-[#111111] text-[#FAF7F2] backdrop-blur-xl">
       <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:h-18 lg:px-8">
         <Link
           to="/"
-          className="flex min-w-0 items-center gap-2.5 rounded-md font-display text-lg font-semibold tracking-tight"
+          className="flex min-w-0 items-center rounded-md"
         >
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary font-display text-sm font-semibold text-primary-foreground shadow-sm">
-            {SITE.short}
-          </span>
-          <span className="truncate">{SITE.name}</span>
+          <img
+            src="/images/darey-creatives-logo.png"
+            alt="DAREY CREATIVES"
+            className="h-10 w-auto shrink-0 object-contain md:h-12 lg:h-14"
+          />
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-2">
@@ -47,8 +48,8 @@ export function Navbar() {
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
-                className="shrink-0 rounded-full px-2 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground xl:px-3 xl:text-sm"
-                activeProps={{ className: "text-foreground font-semibold" }}
+                className="shrink-0 rounded-full px-2 py-2 text-xs font-medium text-[#FAF7F2]/75 transition-colors hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2] xl:px-3 xl:text-sm"
+                activeProps={{ className: "text-[#FAF7F2] font-semibold" }}
               >
                 {item.label}
               </Link>
@@ -58,6 +59,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
+            className="text-[#FAF7F2] hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2]"
             onClick={toggle}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           >
@@ -70,18 +72,18 @@ export function Navbar() {
             ) : session && user ? (
               <>
                 <Link to="/dashboard">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-[#FAF7F2] hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2]">
                     Dashboard
                   </Button>
                 </Link>
-                <Button size="sm" variant="outline" onClick={handleSignOut} disabled={signingOut}>
+                <Button size="sm" variant="outline" className="border-[#E8E1D8]/50 text-[#FAF7F2] hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2]" onClick={handleSignOut} disabled={signingOut}>
                   {signingOut ? "Logging out…" : "Log out"}
                 </Button>
               </>
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-[#FAF7F2] hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2]">
                     Log in
                   </Button>
                 </Link>
@@ -95,7 +97,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="text-[#FAF7F2] hover:bg-[#FAF7F2]/10 hover:text-[#FAF7F2] lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}

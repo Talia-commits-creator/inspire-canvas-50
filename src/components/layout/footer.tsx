@@ -7,11 +7,12 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3">
-            <div className="flex items-center gap-2.5 font-display text-lg font-semibold">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary text-sm text-primary-foreground">
-                {SITE.short}
-              </span>
-              {SITE.name}
+            <div>
+              <img
+                src="/images/darey-creatives-logo.png"
+                alt="DAREY CREATIVES"
+                className="h-20 w-20 object-contain"
+              />
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               {SITE.tagline}
