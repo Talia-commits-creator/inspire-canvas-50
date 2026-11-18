@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.15"
   }
   public: {
     Tables: {
@@ -51,6 +51,86 @@ export type Database = {
             columns: ["service_id"]
             isOneToOne: false
             referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collaboration_participants: {
+        Row: {
+          collaboration_id: string
+          created_at: string
+          role: Database["public"]["Enums"]["collaboration_participant_role"]
+          user_id: string
+        }
+        Insert: {
+          collaboration_id: string
+          created_at?: string
+          role: Database["public"]["Enums"]["collaboration_participant_role"]
+          user_id: string
+        }
+        Update: {
+          collaboration_id?: string
+          created_at?: string
+          role?: Database["public"]["Enums"]["collaboration_participant_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collaboration_participants_collaboration_id_fkey"
+            columns: ["collaboration_id"]
+            isOneToOne: false
+            referencedRelation: "collaborations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collaborations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          organization_id: string | null
+          owner_id: string
+          source_booking_id: string | null
+          status: Database["public"]["Enums"]["collaboration_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          organization_id?: string | null
+          owner_id: string
+          source_booking_id?: string | null
+          status?: Database["public"]["Enums"]["collaboration_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          organization_id?: string | null
+          owner_id?: string
+          source_booking_id?: string | null
+          status?: Database["public"]["Enums"]["collaboration_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collaborations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collaborations_source_booking_id_fkey"
+            columns: ["source_booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
             referencedColumns: ["id"]
           },
         ]
@@ -573,6 +653,26 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      create_collaboration_from_booking: {
+        Args: { _booking_id: string; _description?: string; _title: string }
+        Returns: {
+          created_at: string
+          description: string | null
+          id: string
+          organization_id: string | null
+          owner_id: string
+          source_booking_id: string | null
+          status: Database["public"]["Enums"]["collaboration_status"]
+          title: string
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "collaborations"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       generate_username: { Args: { _seed: string }; Returns: string }
       get_public_creator_profile: { Args: { _username: string }; Returns: Json }
       get_public_organization: { Args: { _slug: string }; Returns: Json }
@@ -597,6 +697,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_collaboration_participant: {
+        Args: { _collaboration_id: string }
+        Returns: boolean
+      }
       is_username_available: { Args: { _username: string }; Returns: boolean }
       list_community_posts: { Args: { _limit?: number }; Returns: Json }
       list_public_creators: { Args: { _limit?: number }; Returns: Json }
@@ -605,6 +709,12 @@ export type Database = {
     Enums: {
       app_role: "creator" | "client" | "organization" | "admin"
       booking_status: "pending" | "accepted" | "rejected"
+      collaboration_participant_role:
+        | "owner"
+        | "creator"
+        | "client"
+        | "organization"
+      collaboration_status: "draft" | "active" | "completed" | "cancelled"
       community_post_status: "draft" | "published" | "archived"
       community_post_visibility: "public" | "private"
       creator_availability: "available" | "limited" | "unavailable"
@@ -746,6 +856,13 @@ export const Constants = {
     Enums: {
       app_role: ["creator", "client", "organization", "admin"],
       booking_status: ["pending", "accepted", "rejected"],
+      collaboration_participant_role: [
+        "owner",
+        "creator",
+        "client",
+        "organization",
+      ],
+      collaboration_status: ["draft", "active", "completed", "cancelled"],
       community_post_status: ["draft", "published", "archived"],
       community_post_visibility: ["public", "private"],
       creator_availability: ["available", "limited", "unavailable"],

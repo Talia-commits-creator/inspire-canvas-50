@@ -29,6 +29,13 @@
       "when": 1790327227930,
       "tag": "0003_community_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795005313807,
+      "tag": "0004_collaboration_foundation",
+      "breakpoints": true
     }
   ]
 }
