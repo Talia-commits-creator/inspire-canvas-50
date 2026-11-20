@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Sparkles, Shield, CheckCircle2, ArrowUpRight } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
 import { PageHeader } from "@/components/common/page-header";
@@ -11,9 +11,16 @@ import { useMySubscription, useSubscriptionPlans } from "@/hooks/use-premium";
 import { SUBSCRIPTION_STATUS_LABELS } from "@/lib/premium";
 
 export const Route = createFileRoute("/_authenticated/settings/plans")({
+  beforeLoad: () => {
+    throw redirect({ to: "/dashboard", replace: true });
+  },
   head: () => ({
     meta: [
       { title: "Subscription & Plans — DAREY CREATIVES" },
+      { property: "og:title", content: "Subscription & Plans — DAREY CREATIVES" },
+      { property: "og:description", content: "Account plan settings on DAREY CREATIVES." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content: "Manage your membership plan and explore available entitlements.",

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { Info, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/layout/site-layout";
@@ -16,9 +16,14 @@ import {
 import { useSubscriptionPlans, useMySubscription } from "@/hooks/use-premium";
 
 export const Route = createFileRoute("/pricing")({
+  beforeLoad: () => {
+    throw redirect({ to: "/", replace: true });
+  },
   head: () => ({
     meta: [
       { title: "Plans & Pricing — DAREY CREATIVES" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content: "Explore subscription plans for creators and organizations on DAREY CREATIVES.",

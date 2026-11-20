@@ -21,7 +21,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
 import { useAvatarUrl, useProfile, useRoles } from "@/hooks/use-profile";
-import { useMySubscription } from "@/hooks/use-premium";
 import { useMyCreatorProfile } from "@/hooks/use-creator";
 import { useMyOrganization } from "@/hooks/use-organization";
 import { PROFILE_FIELD_LABELS, initialsFrom, profileCompletion } from "@/lib/profile";
@@ -30,6 +29,8 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — DAREY CREATIVES" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Your account home on DAREY CREATIVES." },
       { property: "og:title", content: "Dashboard — DAREY CREATIVES" },
       { property: "og:description", content: "Your profile summary and account settings." },
@@ -45,7 +46,6 @@ function DashboardPage() {
   const { data: profile, isLoading, isError, refetch } = useProfile();
   const { data: roles } = useRoles();
   const { data: avatarUrl } = useAvatarUrl(profile?.avatar_url);
-  const { data: subscription } = useMySubscription();
   const { data: creatorData } = useMyCreatorProfile();
   const { data: orgData } = useMyOrganization();
 
@@ -74,9 +74,6 @@ function DashboardPage() {
           <>
             <Link to="/settings/profile">
               <Button>Edit profile</Button>
-            </Link>
-            <Link to="/settings/plans">
-              <Button variant="outline">Membership & Plans</Button>
             </Link>
             {roles?.includes("admin") ? (
               <Link to="/admin">
@@ -117,7 +114,6 @@ function DashboardPage() {
                     Pick up where you need to
                   </h2>
                 </div>
-                <Badge variant="gold">{subscription?.plan.name ?? "Free Community"}</Badge>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {[
@@ -273,41 +269,6 @@ function DashboardPage() {
                     Edit profile
                   </Button>
                 </Link>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="font-display text-xl">Membership tier</CardTitle>
-                  <Badge
-                    variant={subscription?.plan.slug === "creator_pro" ? "default" : "secondary"}
-                  >
-                    {subscription?.plan.name ?? "Free Community"}
-                  </Badge>
-                </div>
-                <CardDescription>
-                  Your active membership plan and tier capabilities.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {subscription?.plan.slug === "creator_pro"
-                    ? "You have Creator Pro enabled with expanded portfolio capacity (60 works) and up to 50 active services."
-                    : "You are on the Free Community tier with standard portfolio showcase (6 works) and 3 service listings."}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Link to="/settings/plans">
-                    <Button variant="outline" size="sm">
-                      Manage plan
-                    </Button>
-                  </Link>
-                  <Link to="/pricing">
-                    <Button variant="ghost" size="sm">
-                      Compare all plans
-                    </Button>
-                  </Link>
-                </div>
               </CardContent>
             </Card>
 

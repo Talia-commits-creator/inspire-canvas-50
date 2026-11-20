@@ -12,7 +12,6 @@ export const PRIMARY_NAV = [
   { to: "/organizations", label: "Organizations" },
   { to: "/projects", label: "Projects" },
   { to: "/community", label: "Community" },
-  { to: "/pricing", label: "Plans" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -24,7 +23,6 @@ export const MOBILE_NAV = [
   { to: "/organizations", label: "Organizations" },
   { to: "/projects", label: "Projects" },
   { to: "/community", label: "Community" },
-  { to: "/pricing", label: "Plans & Pricing" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -37,7 +35,6 @@ export const FOOTER_GROUPS = [
       { to: "/creators", label: "Creators" },
       { to: "/organizations", label: "Organizations" },
       { to: "/projects", label: "Projects" },
-      { to: "/pricing", label: "Plans & Pricing" },
     ],
   },
   {

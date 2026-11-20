@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Retain monetisation page bodies behind route-level redirects; removing core-workspace subscription consumers keeps future billing code intact without invoking it during ordinary journeys.
